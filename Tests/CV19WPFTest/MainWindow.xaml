@@ -9,5 +9,14 @@
 	Width="800"
 	Height="450"
 	mc:Ignorable="d">
-	<Grid />
+	<Grid >
+		<Button Content="Button" HorizontalAlignment="Left" Margin="76,66,0,0" VerticalAlignment="Top"/>
+		<TextBox HorizontalAlignment="Center" Margin="0,70,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="334"/>
+		<Label Content="Label" HorizontalAlignment="Left" Height="25" Margin="233,124,0,0" VerticalAlignment="Top" Width="91"/>
+		<ComboBox HorizontalAlignment="Left" Height="33" Margin="36,246,0,0" VerticalAlignment="Top" Width="242"/>
+		<RadioButton Content="RadioButton" HorizontalAlignment="Left" Height="24" Margin="329,119,0,0" VerticalAlignment="Top" Width="219"/>
+		<RadioButton Content="RadioButton" HorizontalAlignment="Left" Height="24" Margin="329,169,0,0" VerticalAlignment="Top" Width="219"/>
+		<ProgressBar HorizontalAlignment="Left" Height="29" Margin="76,338,0,0" VerticalAlignment="Top" Width="218"/>
+		<Slider HorizontalAlignment="Left" Height="29" Margin="460,338,0,0" VerticalAlignment="Top" Width="296"/>
+	</Grid>
 </Window>
