@@ -13,17 +13,43 @@ namespace CV19.ViewModels
 {
 	internal class MainWindowViewModel : ViewModel
 	{
-		#region TestDataPoints : IEnumerable<DataPoint> - Тестовый набор данных для визуализации графиков
 
-		private IEnumerable<DataPoint> _testDataPoints;
+		#region Изменение вкладок по нажатию "вперед" и "назад"
 
-		public IEnumerable<DataPoint> TestDataPoints 
-		{ 
-			get => _testDataPoints; 
-			set => Set(ref _testDataPoints, value); 
+		private int _selectedTabIndex;
+
+		public int SelectedTabIndex
+		{
+			get => _selectedTabIndex;
+			set => Set(ref _selectedTabIndex, value);
 		}
 
-		#endregion // TestDataPoints
+		#endregion // Изменение вкладок по нажатию "вперед" и "назад"
+
+
+		#region TestPlotModel : IEnumerable<DataPoint> - Тестовый набор данных для визуализации графиков
+
+		//private IEnumerable<DataPoint> _testDataPoints;
+
+		//public IEnumerable<DataPoint> TestDataPoints 
+		//{ 
+		//	get => _testDataPoints; 
+		//	set => Set(ref _testDataPoints, value); 
+		//}
+
+		// рабочий вариант поля
+		private PlotModel _testPlotModel;
+
+		/// <summary>
+		/// Рабочий вариант свойства
+		/// </summary>
+		public PlotModel TestPlotModel
+		{
+			get => _testPlotModel;
+			set => Set(ref _testPlotModel, value);
+		}
+
+		#endregion // TestPlotModel
 
 		#region Title
 
@@ -78,15 +104,29 @@ namespace CV19.ViewModels
 		#endregion // CloseApplicationCommand
 
 
+		#region ArrowLeftRightCommand
+		public ICommand ChangeTabIndexCommand { get; }
+
+		private void OnChangeTabIndexCommandExecute(object p)
+		{
+			if (p is null) return;
+			SelectedTabIndex += Convert.ToInt32(p);
+		}
+
+		private bool CanChangeTabIndexCommandExecuted(object p) => _selectedTabIndex >= 0;
+		#endregion
+
 		#endregion // Commands
 
 		public MainWindowViewModel()
 		{
-			#region Commands
+			#region Commands init
 
 			CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
 
-			#endregion
+			ChangeTabIndexCommand = new LambdaCommand(OnChangeTabIndexCommandExecute, CanChangeTabIndexCommandExecuted);
+
+			#endregion // Commands init
 
 
 			var plotM = new PlotModel { Title = "Синусоида", Subtitle = "Проба OxyPlot" };
@@ -108,15 +148,5 @@ namespace CV19.ViewModels
 		}
 
 
-		private PlotModel _testPlotModel;
-
-		/// <summary>
-		/// Gets the plot model.
-		/// </summary>
-		public PlotModel TestPlotModel 
-		{ 
-			get => _testPlotModel; 
-			set => Set(ref _testPlotModel, value);
-		}
 	}
 }

@@ -36,23 +36,37 @@
 			<MenuItem Header="Помощь">
 				<MenuItem Header="О программе" />
 			</MenuItem>
+			<MenuItem Command="{Binding ChangeTabIndexCommand}" CommandParameter="-1">
+				<MenuItem.Header>
+					<fa:ImageAwesome Height="12" Icon="Solid_ChevronLeft" />
+				</MenuItem.Header>
+			</MenuItem>
+			<MenuItem Command="{Binding ChangeTabIndexCommand}" CommandParameter="1">
+				<MenuItem.Header>
+					<fa:ImageAwesome Height="12" Icon="Solid_ChevronRight" />
+				</MenuItem.Header>
+			</MenuItem>
 		</Menu>
 
 		<StatusBar DockPanel.Dock="Bottom">
 			<StatusBarItem MinWidth="150" MaxWidth="350">
-				<TextBlock Text="{Binding Status}" />
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="{Binding Status}" Margin="0,0,5,0"/>
+					<TextBlock Text="{Binding ElementName=tbCtrl, Path=SelectedIndex}" />
+				</StackPanel>
+
 			</StatusBarItem>
 			<StatusBarItem>
 				<ProgressBar Width="120" Height="14" Value="30" />
 			</StatusBarItem>
 		</StatusBar>
 
-		<TabControl>
+		<TabControl x:Name="tbCtrl" SelectedIndex="{Binding SelectedTabIndex}">
 			<TabItem Header="График">
 				<oxy:PlotView Model="{Binding TestPlotModel}" />
 			</TabItem>
 			
-			<TabItem Visibility="Collapsed">
+			<TabItem>
 				<TabItem.Header>
 					<StackPanel Orientation="Horizontal">
 						<fa:ImageAwesome Icon="Solid_YinYang" Foreground="Chocolate"  Height="14" Margin="0,0,5,0" />
@@ -84,7 +98,14 @@
 					</Ellipse>
 				</Grid>
 			</TabItem>
-
+			
+			<TabItem Header="Вкладка 2"/>
+			<TabItem Header="Вкладка 3"/>
+			<TabItem Header="Вкладка 4"/>
+			<TabItem Header="Вкладка 5"/>
+			<TabItem Header="Вкладка 6"/>
+			<TabItem Header="Вкладка 7"/>
+			
 		</TabControl>
 	</DockPanel>
 
