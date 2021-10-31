@@ -7,12 +7,19 @@ using OxyPlot;
 using OxyPlot.Series;
 using CV19.Models;
 using CV19.ViewModels.Base;
-
+using System.Collections.ObjectModel;
+using CV19.Models.Decanat;
+using System.Linq;
 
 namespace CV19.ViewModels
 {
 	internal class MainWindowViewModel : ViewModel
 	{
+		#region Группы студентов (тестирование стилей и оформления)
+
+		public ObservableCollection<Group> Groups { get; }
+
+		#endregion
 
 		#region Изменение вкладок по нажатию "вперед" и "назад"
 
@@ -25,7 +32,6 @@ namespace CV19.ViewModels
 		}
 
 		#endregion // Изменение вкладок по нажатию "вперед" и "назад"
-
 
 		#region TestPlotModel : IEnumerable<DataPoint> - Тестовый набор данных для визуализации графиков
 
@@ -125,6 +131,7 @@ namespace CV19.ViewModels
 
 			#endregion // Commands init
 
+			#region Создание графика синусоиды (наполнение данными)
 
 			var plotM = new PlotModel { Title = "Синусоида", Subtitle = "Проба OxyPlot" };
 
@@ -142,7 +149,36 @@ namespace CV19.ViewModels
 			plotM.Series.Add(point_series);
 
 			TestPlotModel = plotM;
+
+			#endregion // Создание графика синусоиды (наполнение данными)
+
+			#region Создание групп студентов (стили)
+
+			var student_index = 1;
+
+			var students = Enumerable.Range(1, 10).Select(i => new Student
+			{
+				Name = $"Name {student_index}",
+				Surname = $"Surname {student_index}",
+				Patronimic = $"Patronimic {student_index++}",
+				Birthday = DateTime.Now,
+				Rating = 0
+			});
+
+			var groups = Enumerable.Range(1, 20).Select(i => new Group
+			{
+				Name = $"Группа {i}",
+				Students = new ObservableCollection<Student>(students)
+			});
+
+			Groups = new ObservableCollection<Group>(groups);
+
+			#endregion
+
 		}
+
+
+
 
 
 	}
