@@ -37,12 +37,9 @@ namespace CV19.ViewModels
 		//	set => Set(ref _testDataPoints, value); 
 		//}
 
-		// рабочий вариант поля
+
 		private PlotModel _testPlotModel;
 
-		/// <summary>
-		/// Рабочий вариант свойства
-		/// </summary>
 		public PlotModel TestPlotModel
 		{
 			get => _testPlotModel;
