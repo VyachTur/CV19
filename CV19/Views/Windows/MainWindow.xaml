@@ -10,6 +10,7 @@
         xmlns:local="clr-namespace:CV19"
         mc:Ignorable="d"
 		  xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf"
+		  xmlns:sys="clr-namespace:System;assembly=System.Runtime"
 		  Title="{Binding Title}"
 		  Height="600" Width="1100">
 
@@ -63,6 +64,44 @@
 		</StatusBar>
 
 		<TabControl x:Name="tbCtrl" SelectedIndex="{Binding SelectedTabIndex}">
+
+			<TabItem Header="Разнородные данные">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition />
+					</Grid.ColumnDefinitions>
+					
+					<GroupBox Header="Элементы">
+						<ListBox ItemsSource="{Binding CompositeCollection}"  SelectedItem="{Binding SelectedCompositeValue}">
+							<ListBox.Resources>
+								<DataTemplate DataType="{x:Type decanat:Group}">
+									<TextBlock Text="{Binding Name, StringFormat=Группа: {0}}" />
+								</DataTemplate>
+								<DataTemplate DataType="{x:Type decanat:Student}">
+									<TextBlock Text="{Binding Name, StringFormat=Студент: {0}}" />
+								</DataTemplate>
+								<DataTemplate DataType="{x:Type sys:String}">
+									<TextBlock>
+										<Run Foreground="Aqua" FontWeight="Bold">Строка:</Run>
+										<TextBlock Text="{Binding}" />
+									</TextBlock>
+								</DataTemplate>
+								<DataTemplate DataType="{x:Type sys:Int32}">
+									<TextBlock>
+									Число:
+									<TextBlock Text="{Binding}" />
+								</TextBlock>
+								</DataTemplate>
+							</ListBox.Resources>
+						</ListBox>
+					</GroupBox>
+					
+					<GroupBox Header="Выбранный элемент" Grid.Column="1">
+						<ContentControl Content="{Binding SelectedCompositeValue}" />
+					</GroupBox>
+				</Grid>
+			</TabItem>
 			
 			<TabItem Header="Студенты">
 				<Grid>

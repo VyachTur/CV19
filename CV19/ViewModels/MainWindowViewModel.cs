@@ -18,8 +18,18 @@ namespace CV19.ViewModels
 
 		public ObservableCollection<Group> Groups { get; }	// Группы студентов
 
-		public object[] CompositeCollection { get; }	// Массив разнородных типов
+		public object[] CompositeCollection { get; }    // Массив разнородных типов
 
+
+		#region SelectedCompositeValue, object - выбранный непонятный элемент	
+		private object _selectedCompositeValue;
+
+		public object SelectedCompositeValue 
+		{ 
+			get => _selectedCompositeValue; 
+			set => Set(ref _selectedCompositeValue, value); 
+		}
+		#endregion
 
 		#region SelectedGroup для работы привязки Групп и Студентов
 		private Group _selectedGroup;
@@ -186,7 +196,14 @@ namespace CV19.ViewModels
 			#endregion
 
 			#region Коллекция разнородных данных
+			var list_objects = new List<object>();
 
+			list_objects.Add("Hello World!");
+			list_objects.Add(42);
+			list_objects.Add(Groups[2]);
+			list_objects.Add(Groups[2].Students[0]);
+
+			CompositeCollection = list_objects.ToArray();
 			#endregion
 
 		}
