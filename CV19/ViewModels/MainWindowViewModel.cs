@@ -16,6 +16,7 @@ namespace CV19.ViewModels
 	internal class MainWindowViewModel : ViewModel
 	{
 		#region Fields and Properties
+
 		public ObservableCollection<Group> Groups { get; }  // Группы студентов
 
 		public object[] CompositeCollection { get; }    // Массив разнородных типов
