@@ -155,7 +155,7 @@ namespace CV19.ViewModels
 		{
 			var new_group = new Group
 			{
-				Name = $"Группа {Groups.Count}",
+				Name = $"Группа {Groups.Count + 1}",
 				Students = new ObservableCollection<Student>()
 			};
 
@@ -171,7 +171,14 @@ namespace CV19.ViewModels
 		private void OnDeleteGroupCommandExecute(object p)
 		{
 			if (!(p is Group group)) return;
+			int group_index = Groups.IndexOf(group);
 			Groups.Remove(group);
+
+			// Индекс выбранной группы
+			if (Groups.Count > 0)
+			{
+				SelectedGroup = group_index < Groups.Count ? Groups[group_index] : SelectedGroup = Groups[group_index - 1];
+			}
 		}
 		#endregion // Удаление
 
