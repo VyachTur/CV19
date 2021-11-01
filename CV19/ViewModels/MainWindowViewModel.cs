@@ -15,11 +15,11 @@ namespace CV19.ViewModels
 {
 	internal class MainWindowViewModel : ViewModel
 	{
-		#region Группы студентов (тестирование стилей и оформления)
 
-		public ObservableCollection<Group> Groups { get; }
+		public ObservableCollection<Group> Groups { get; }	// Группы студентов
 
-		#endregion
+		public object[] CompositeCollection { get; }	// Массив разнородных типов
+
 
 		#region SelectedGroup для работы привязки Групп и Студентов
 		private Group _selectedGroup;
@@ -182,6 +182,10 @@ namespace CV19.ViewModels
 			});
 
 			Groups = new ObservableCollection<Group>(groups);
+
+			#endregion
+
+			#region Коллекция разнородных данных
 
 			#endregion
 
