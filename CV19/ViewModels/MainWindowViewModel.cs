@@ -21,6 +21,16 @@ namespace CV19.ViewModels
 
 		#endregion
 
+		#region SelectedGroup для работы привязки Групп и Студентов
+		private Group _selectedGroup;
+
+		public Group SelectedGroup
+		{
+			get => _selectedGroup;
+			set => Set(ref _selectedGroup, value);
+		}
+		#endregion
+
 		#region Изменение вкладок по нажатию "вперед" и "назад"
 
 		private int _selectedTabIndex;

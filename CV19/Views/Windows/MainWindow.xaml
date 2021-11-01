@@ -10,7 +10,7 @@
         mc:Ignorable="d"
 		  xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf"
 		  Title="{Binding Title}"
-		  Height="450" Width="800">
+		  Height="600" Width="1100">
 
 	<Window.InputBindings>
 		<KeyBinding Modifiers="Ctrl" Key="Q" Command="{Binding CloseApplicationCommand}" />
@@ -62,9 +62,6 @@
 		</StatusBar>
 
 		<TabControl x:Name="tbCtrl" SelectedIndex="{Binding SelectedTabIndex}">
-			<TabItem Header="График">
-				<oxy:PlotView Model="{Binding TestPlotModel}" />
-			</TabItem>
 			
 			<TabItem Header="Студенты">
 				<Grid>
@@ -74,17 +71,31 @@
 					</Grid.ColumnDefinitions>
 
 					<GroupBox Grid.Column="0" Header="Группы">
-						<ListView ItemsSource="{Binding Groups}" DisplayMemberPath="Name" />
+						<ListView x:Name="lstGroups" ItemsSource="{Binding Groups}" SelectedIndex="0"
+									 DisplayMemberPath="Name"
+									 SelectedItem="{Binding SelectedGroup}" />
 					</GroupBox>
 
-					<GroupBox Grid.Column="1" Header="Студенты">
-						<DataGrid>
-							
+					<GroupBox Grid.Column="1" Header="{Binding SelectedGroup.Name, FallbackValue='Студенты', TargetNullValue='Группа не выбрана'}">
+						<DataGrid ItemsSource="{Binding SelectedGroup.Students}" AutoGenerateColumns="False" IsReadOnly="True"
+									 GridLinesVisibility="Vertical" VerticalGridLinesBrush="DarkKhaki" AlternatingRowBackground="Bisque">
+							<DataGrid.Columns>
+								<DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}" />
+								<DataGridTextColumn Header="Имя" Binding="{Binding Name}" />
+								<DataGridTextColumn Header="Отчество" Binding="{Binding Patronimic}" />
+								<DataGridTextColumn Header="Дата рождения" Binding="{Binding Birthday, StringFormat='dd.MM.yyyy'}" />
+								<DataGridTextColumn Header="Рейтинг" Binding="{Binding Rating}" />
+								<DataGridTextColumn Header="Группа" Binding="{Binding DataContext.SelectedGroup.Name, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+							</DataGrid.Columns>
 						</DataGrid>
 					</GroupBox>
 				</Grid>
 			</TabItem>
-			
+
+			<TabItem Header="График">
+				<oxy:PlotView Model="{Binding TestPlotModel}" />
+			</TabItem>
+
 			<TabItem Header="Вкладка 2"/>
 			<TabItem Header="Вкладка 3"/>
 			<TabItem Header="Вкладка 4"/>
