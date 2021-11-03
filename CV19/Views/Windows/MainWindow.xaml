@@ -7,10 +7,8 @@
 		  xmlns:cmd="clr-namespace:CV19.Infrastructure.Commands"
 		  xmlns:vm="clr-namespace:CV19.ViewModels"
 		  xmlns:decanat="clr-namespace:CV19.Models.Decanat"
-        xmlns:local="clr-namespace:CV19"
         mc:Ignorable="d"
 		  xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf"
-		  xmlns:sys="clr-namespace:System;assembly=System.Runtime"
 		  Title="{Binding Title}"
 		  Height="600" Width="1100">
 
