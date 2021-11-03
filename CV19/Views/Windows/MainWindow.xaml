@@ -75,8 +75,8 @@
 					<GroupBox Grid.Column="0" Header="Группы">
 						<DockPanel>
 							<UniformGrid Margin="0,3,0,0" DockPanel.Dock="Bottom" Rows="1">
-								<Button Margin="0,0,3,0" Content="Добавить" Command="{Binding CreateGroupCommand}" />
-								<Button Content="Удалить" Command="{Binding DeleteGroupCommand}" CommandParameter="{Binding SelectedGroup}" />
+								<Button Style="{StaticResource CheckButtonStyle}" Margin="0,0,3,0" Content="Добавить" Command="{Binding CreateGroupCommand}" />
+								<Button Style="{StaticResource RemoveButtonStyle}" Content="Удалить" Command="{Binding DeleteGroupCommand}" CommandParameter="{Binding SelectedGroup}" />
 							</UniformGrid>
 							<ListView x:Name="lstGroups" ItemsSource="{Binding Groups}" SelectedIndex="0"
 									 SelectedItem="{Binding SelectedGroup}">
