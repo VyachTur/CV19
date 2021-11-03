@@ -74,7 +74,15 @@
 					<!--<TextBlock Text="{Binding Source={x:Static l:App.IsDesignMode}}" />-->
 
 					<ListBox Grid.Row="1" HorizontalAlignment="Left" Width="200" Margin="10"
-								ItemsSource="{Binding LstTestStudents}">
+								ItemsSource="{Binding LstTestStudents}"
+								VirtualizingPanel.IsContainerVirtualizable="True"
+								VirtualizingPanel.IsVirtualizing="True"
+								VirtualizingPanel.VirtualizationMode="Recycling">
+						<ListBox.ItemsPanel>
+							<ItemsPanelTemplate>
+								<VirtualizingStackPanel />
+							</ItemsPanelTemplate>
+						</ListBox.ItemsPanel>
 						<ListBox.ItemContainerStyle>
 							<Style TargetType="ListBoxItem">
 								<Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -158,7 +166,15 @@
 							</DockPanel>
 							
 							<DataGrid ItemsSource="{Binding SelectedGroup.Students}" AutoGenerateColumns="False"
-									 GridLinesVisibility="Vertical" VerticalGridLinesBrush="DarkKhaki" AlternatingRowBackground="Bisque">
+									 GridLinesVisibility="Vertical" VerticalGridLinesBrush="DarkKhaki" AlternatingRowBackground="Bisque"
+										 EnableRowVirtualization="True">
+
+								<DataGrid.ItemsPanel>
+									<ItemsPanelTemplate>
+										<VirtualizingStackPanel />
+									</ItemsPanelTemplate>
+								</DataGrid.ItemsPanel>
+								
 								<DataGrid.Columns>
 									<DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}" Width="Auto" />
 									<DataGridTextColumn Header="Имя" Binding="{Binding Name}"  IsReadOnly="True" />
