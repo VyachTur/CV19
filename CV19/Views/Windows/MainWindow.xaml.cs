@@ -22,7 +22,7 @@ namespace CV19
 	{
 		public MainWindow()
 		{
-			InitializeComponent();
+			InitializeComponent(); // comment
 		}
 	}
 }
