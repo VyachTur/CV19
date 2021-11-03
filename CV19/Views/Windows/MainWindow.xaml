@@ -83,6 +83,9 @@
 						<ListBox.ItemTemplate>
 							<DataTemplate DataType="decanat:Student">
 								<Border BorderBrush="Aquamarine" BorderThickness="1" CornerRadius="3" Padding="3">
+									<Border.CacheMode>
+										<BitmapCache />
+									</Border.CacheMode>
 									<StackPanel>
 										<TextBlock Text="{Binding Name}" ToolTip="{Binding Name}" />
 										<TextBlock Text="{Binding Surname}" ToolTip="{Binding Surname}" />
