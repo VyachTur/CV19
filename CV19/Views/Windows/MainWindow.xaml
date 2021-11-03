@@ -105,14 +105,6 @@
 								<DataGridTextColumn Header="Отчество" Binding="{Binding Patronimic}"  IsReadOnly="True" />
 								<!--<DataGridTextColumn Header="Дата рождения" Binding="{Binding Birthday, StringFormat='dd.MM.yyyy'}" />-->
 
-								<!--<DataGridTemplateColumn Header="Дата рождения">
-									<DataGridTemplateColumn.CellTemplate>
-										<DataTemplate DataType="decanat:Student">
-											<DatePicker SelectedDate="{Binding Birthday}" />
-										</DataTemplate>
-									</DataGridTemplateColumn.CellTemplate>
-								</DataGridTemplateColumn>-->
-
 								<DataGridTemplateColumn Header="Дата рождения">
 									<DataGridTemplateColumn.CellTemplate>
 										<DataTemplate DataType="decanat:Student">
@@ -135,7 +127,7 @@
 				</Grid>
 			</TabItem>
 
-			<TabItem Header="Разнородные данные">
+			<TabItem Header="Разнородные данные" Visibility="Collapsed">
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="Auto"/>
@@ -170,16 +162,9 @@
 				</Grid>
 			</TabItem>
 
-			<TabItem Header="График">
+			<TabItem Header="График" Visibility="Collapsed">
 				<oxy:PlotView Model="{Binding TestPlotModel}" />
 			</TabItem>
-
-			<TabItem Header="Вкладка 2"/>
-			<TabItem Header="Вкладка 3"/>
-			<TabItem Header="Вкладка 4"/>
-			<TabItem Header="Вкладка 5"/>
-			<TabItem Header="Вкладка 6"/>
-			<TabItem Header="Вкладка 7"/>
 			
 		</TabControl>
 	</DockPanel>
