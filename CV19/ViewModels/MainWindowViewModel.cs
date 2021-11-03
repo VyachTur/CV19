@@ -7,12 +7,41 @@ using OxyPlot;
 using OxyPlot.Series;
 using CV19.Models;
 using CV19.ViewModels.Base;
-
+using System.Collections.ObjectModel;
+using CV19.Models.Decanat;
+using System.Linq;
 
 namespace CV19.ViewModels
 {
 	internal class MainWindowViewModel : ViewModel
 	{
+		#region Fields and Properties
+
+		public ObservableCollection<Group> Groups { get; }  // Группы студентов
+
+		public object[] CompositeCollection { get; }    // Массив разнородных типов
+
+
+
+		#region SelectedGroup для работы привязки Групп и Студентов
+		private Group _selectedGroup;
+
+		public Group SelectedGroup
+		{
+			get => _selectedGroup;
+			set => Set(ref _selectedGroup, value);
+		}
+		#endregion
+
+		#region SelectedCompositeValue, object - выбранный непонятный элемент	
+		private object _selectedCompositeValue;
+
+		public object SelectedCompositeValue
+		{
+			get => _selectedCompositeValue;
+			set => Set(ref _selectedCompositeValue, value);
+		}
+		#endregion
 
 		#region Изменение вкладок по нажатию "вперед" и "назад"
 
@@ -25,7 +54,6 @@ namespace CV19.ViewModels
 		}
 
 		#endregion // Изменение вкладок по нажатию "вперед" и "назад"
-
 
 		#region TestPlotModel : IEnumerable<DataPoint> - Тестовый набор данных для визуализации графиков
 
@@ -85,7 +113,10 @@ namespace CV19.ViewModels
 
 		#endregion // Status
 
-		#region Commands
+		#endregion // Fields and Properties
+
+
+		#region Создание комманд (тело)
 
 		#region CloseApplicationCommand
 
@@ -113,18 +144,61 @@ namespace CV19.ViewModels
 		private bool CanChangeTabIndexCommandExecuted(object p) => _selectedTabIndex >= 0;
 		#endregion
 
+
+		#region Создание и Удаление групп со студентами (две команды)
+
+		#region Создание
+		public ICommand CreateGroupCommand { get; }
+
+		private bool CanCreateGroupCommandExecute(object p) => true;
+
+		private void OnCreateGroupCommandExecute(object p)
+		{
+			var new_group = new Group
+			{
+				Name = $"Группа {Groups.Count + 1}",
+				Students = new ObservableCollection<Student>()
+			};
+
+			Groups.Add(new_group);
+		}
+		#endregion // Создание
+
+		#region Удаление
+		public ICommand DeleteGroupCommand { get; }
+
+		private bool CanDeleteGroupCommandExecute(object p) => p is Group group && Groups.Contains(group);
+
+		private void OnDeleteGroupCommandExecute(object p)
+		{
+			if (!(p is Group group)) return;
+			int group_index = Groups.IndexOf(group);
+			Groups.Remove(group);
+
+			// Индекс выбранной группы
+			if (Groups.Count > 0)
+			{
+				SelectedGroup = group_index < Groups.Count ? Groups[group_index] : SelectedGroup = Groups[group_index - 1];
+			}
+		}
+		#endregion // Удаление
+
+		#endregion // Создание и Удаление групп со студентами (две команды)
+
 		#endregion // Commands
 
 		public MainWindowViewModel()
 		{
-			#region Commands init
+			#region ИНИЦИАЛИЗАЦИЯ КОММАНД!
 
-			CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+			CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);  // закрытие приложения
+			ChangeTabIndexCommand = new LambdaCommand(OnChangeTabIndexCommandExecute, CanChangeTabIndexCommandExecuted);        // изменение индекса вкладки
+			CreateGroupCommand = new LambdaCommand(OnCreateGroupCommandExecute, CanCreateGroupCommandExecute);                  // создание группы со студентами
+			DeleteGroupCommand = new LambdaCommand(OnDeleteGroupCommandExecute, CanDeleteGroupCommandExecute);                  // удаление группы со студентами
 
-			ChangeTabIndexCommand = new LambdaCommand(OnChangeTabIndexCommandExecute, CanChangeTabIndexCommandExecuted);
+			#endregion // ИНИЦИАЛИЗАЦИЯ КОММАНД!
 
-			#endregion // Commands init
-
+			#region Создание графика синусоиды (наполнение данными)
 
 			var plotM = new PlotModel { Title = "Синусоида", Subtitle = "Проба OxyPlot" };
 
@@ -142,8 +216,44 @@ namespace CV19.ViewModels
 			plotM.Series.Add(point_series);
 
 			TestPlotModel = plotM;
-		}
 
+			#endregion // Создание графика синусоиды (наполнение данными)
+
+			#region Создание групп студентов (стили)
+
+			var student_index = 1;
+
+			var students = Enumerable.Range(1, 10).Select(i => new Student
+			{
+				Name = $"Name {student_index}",
+				Surname = $"Surname {student_index}",
+				Patronimic = $"Patronimic {student_index++}",
+				Birthday = DateTime.Now,
+				Rating = 0
+			});
+
+			var groups = Enumerable.Range(1, 20).Select(i => new Group
+			{
+				Name = $"Группа {i}",
+				Students = new ObservableCollection<Student>(students)
+			});
+
+			Groups = new ObservableCollection<Group>(groups);
+
+			#endregion
+
+			#region Коллекция разнородных данных
+			var list_objects = new List<object>();
+
+			list_objects.Add("Hello World!");
+			list_objects.Add(42);
+			list_objects.Add(Groups[2]);
+			list_objects.Add(Groups[2].Students[0]);
+
+			CompositeCollection = list_objects.ToArray();
+			#endregion
+
+		}
 
 	}
 }
