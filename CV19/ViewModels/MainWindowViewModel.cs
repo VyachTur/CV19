@@ -9,6 +9,8 @@ using CV19.ViewModels.Base;
 using System.Collections.ObjectModel;
 using CV19.Models.Decanat;
 using System.Linq;
+using System.Windows.Data;
+using System.ComponentModel;
 
 namespace CV19.ViewModels
 {
@@ -21,8 +23,56 @@ namespace CV19.ViewModels
 		public object[] CompositeCollection { get; }    // Массив разнородных типов
 
 
+		#region SelectedGroupStudents - добавление фильтра по таблице со студентами
 
-		#region TestLargeListBox
+		private string _studentFilterText;
+
+		public string StudentFilterText
+		{
+			get => _studentFilterText;
+			set
+			{
+				if (!Set(ref _studentFilterText, value)) return;
+				_selectedGroupStudents.View.Refresh();
+			}
+				
+		}
+
+		//
+		private readonly CollectionViewSource _selectedGroupStudents = new CollectionViewSource();
+
+		public ICollectionView SelectedGroupStudents => _selectedGroupStudents?.View;
+		//
+
+		private void OnStudentFiltered(object sender, FilterEventArgs e)
+		{
+			if (!(e.Item is Student student))
+			{
+				e.Accepted = false;
+				return;
+			}
+
+			var filter_text = _studentFilterText;
+			if (string.IsNullOrWhiteSpace(filter_text)) return;
+
+			if (student.Name is null || student.Surname is null || student.Patronimic is null)
+			{
+				e.Accepted = false;
+				return;
+			}
+
+			if (student.Name.Contains(filter_text, StringComparison.OrdinalIgnoreCase)) return;
+			if (student.Surname.Contains(filter_text, StringComparison.OrdinalIgnoreCase)) return;
+			if (student.Patronimic.Contains(filter_text, StringComparison.OrdinalIgnoreCase)) return;
+
+			e.Accepted = false;
+		}
+
+		#endregion // SelectedGroupStudents - добавление фильтра по таблице со студентами
+
+
+
+		#region Тестирование большого списка визуальных элементов (расход памяти, виртуализованная панель)
 		public IEnumerable<Student> LstTestStudents => Enumerable.Range(1, App.IsDesignMode ? 10 : 100_000)
 								.Select(i => new Student
 								{
@@ -37,7 +87,13 @@ namespace CV19.ViewModels
 		public Group SelectedGroup
 		{
 			get => _selectedGroup;
-			set => Set(ref _selectedGroup, value);
+			set
+			{
+				if (!Set(ref _selectedGroup, value)) return;
+
+				_selectedGroupStudents.Source = value?.Students;
+				OnPropertyChanged(nameof(SelectedGroupStudents));
+			}
 		}
 		#endregion
 
@@ -248,6 +304,8 @@ namespace CV19.ViewModels
 
 			Groups = new ObservableCollection<Group>(groups);
 
+			SelectedGroup = Groups[0];	// выбор при загрузке первой группы в коллекции
+
 			#endregion
 
 			#region Коллекция разнородных данных
@@ -261,7 +319,12 @@ namespace CV19.ViewModels
 			CompositeCollection = list_objects.ToArray();
 			#endregion
 
-		}
 
+			_selectedGroupStudents.Filter += OnStudentFiltered;
+
+			//_selectedGroupStudents.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Descending));
+			//_selectedGroupStudents.GroupDescriptions.Add(new PropertyGroupDescription("Name"));
+		}
+		
 	}
 }
