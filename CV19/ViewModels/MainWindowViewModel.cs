@@ -5,7 +5,6 @@ using System.Windows.Input;
 using CV19.Infrastructure.Commands;
 using OxyPlot;
 using OxyPlot.Series;
-using CV19.Models;
 using CV19.ViewModels.Base;
 using System.Collections.ObjectModel;
 using CV19.Models.Decanat;
