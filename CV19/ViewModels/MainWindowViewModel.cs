@@ -22,6 +22,15 @@ namespace CV19.ViewModels
 
 
 
+		#region TestLargeListBox
+		public IEnumerable<Student> LstTestStudents => Enumerable.Range(1, App.IsDesignMode ? 10 : 100_000)
+								.Select(i => new Student
+								{
+									Name = $"Имя {i}",
+									Surname = $"Фамилия {i}"
+								});
+		#endregion
+
 		#region SelectedGroup для работы привязки Групп и Студентов
 		private Group _selectedGroup;
 

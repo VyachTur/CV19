@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		  xmlns:fa="http://schemas.fontawesome.com/icons/"
+		  xmlns:l="clr-namespace:CV19"
 		  xmlns:cmd="clr-namespace:CV19.Infrastructure.Commands"
 		  xmlns:vm="clr-namespace:CV19.ViewModels"
 		  xmlns:decanat="clr-namespace:CV19.Models.Decanat"
@@ -62,6 +63,38 @@
 		</StatusBar>
 
 		<TabControl x:Name="tbCtrl" SelectedIndex="{Binding SelectedTabIndex}">
+
+			<TabItem Header="Тестирование виртуализации">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition />
+					</Grid.RowDefinitions>
+
+					<!--<TextBlock Text="{Binding Source={x:Static l:App.IsDesignMode}}" />-->
+
+					<ListBox Grid.Row="1" HorizontalAlignment="Left" Width="200" Margin="10"
+								ItemsSource="{Binding LstTestStudents}">
+						<ListBox.ItemContainerStyle>
+							<Style TargetType="ListBoxItem">
+								<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+							</Style>
+						</ListBox.ItemContainerStyle>
+						<ListBox.ItemTemplate>
+							<DataTemplate DataType="decanat:Student">
+								<Border BorderBrush="Aquamarine" BorderThickness="1" CornerRadius="3" Padding="3">
+									<StackPanel>
+										<TextBlock Text="{Binding Name}" ToolTip="{Binding Name}" />
+										<TextBlock Text="{Binding Surname}" ToolTip="{Binding Surname}" />
+										<TextBlock Text="{Binding Patronimic, TargetNullValue=??}" ToolTip="{Binding Name}" />
+									</StackPanel>
+								</Border>
+								
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+				</Grid>
+			</TabItem>
 
 			<TabItem Header="Студенты">
 				<Grid>
