@@ -72,19 +72,29 @@
 
 					<GroupBox Grid.Column="0" Header="Группы">
 						<DockPanel>
+							<DockPanel.Resources>
+								<CollectionViewSource x:Key="GroupsCollection" Source="{Binding Groups}" />
+							</DockPanel.Resources>
 							<DockPanel Margin="0,5" DockPanel.Dock="Top">
 								<!--<TextBlock Text="Фильтр:" />-->
-								
 								<fa:ImageAwesome Margin="5,0" DockPanel.Dock="Right" Height="14" Icon="Solid_Filter" />
 								<TextBox />
-								
 							</DockPanel>
+							
 							<UniformGrid Margin="0,3,0,0" DockPanel.Dock="Bottom" Rows="1">
 								<Button Style="{StaticResource CheckButtonStyle}" Margin="0,0,3,0" Content="Добавить" Command="{Binding CreateGroupCommand}" />
 								<Button Style="{StaticResource RemoveButtonStyle}" Content="Удалить" Command="{Binding DeleteGroupCommand}" CommandParameter="{Binding SelectedGroup}" />
 							</UniformGrid>
-							<ListView x:Name="lstGroups" ItemsSource="{Binding Groups}" SelectedIndex="0"
-									 SelectedItem="{Binding SelectedGroup}">
+							<ListView x:Name="lstGroups" ItemsSource="{Binding Source={StaticResource GroupsCollection}}" SelectedIndex="0"
+									 SelectedItem="{Binding SelectedGroup}"
+										 VirtualizingPanel.IsContainerVirtualizable="True"
+										 VirtualizingPanel.IsVirtualizing="True"
+										 VirtualizingPanel.VirtualizationMode="Recycling">
+								<ListView.ItemsPanel>
+									<ItemsPanelTemplate>
+										<VirtualizingStackPanel />
+									</ItemsPanelTemplate>
+								</ListView.ItemsPanel>
 							<ListView.ItemTemplate>
 								<DataTemplate DataType="decanat:Group">
 									<StackPanel Orientation="Horizontal">
