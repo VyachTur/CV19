@@ -128,7 +128,7 @@ namespace CV19Console
 
 
 			var russia_data = GetData()
-								.First(v => v.country.Equals("Korea, South", StringComparison.OrdinalIgnoreCase));
+								.First(v => v.country.Equals("Russia", StringComparison.OrdinalIgnoreCase));
 
 			Console.WriteLine(string.Join("\r\n", GetDates().Zip(russia_data.counts, (date, count) => $"{date:dd.MM.yyyy} - {count}")));
 			//Console.WriteLine($"{russia_data.province} | {russia_data.country} | {string.Join(' ', russia_data.counts)}"); // мой вариант

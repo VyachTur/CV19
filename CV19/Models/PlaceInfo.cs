@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace CV19.Models
 {
-	internal abstract class PlaceInfo
+	internal class PlaceInfo
 	{
 		public string Name { get; set; }
 
