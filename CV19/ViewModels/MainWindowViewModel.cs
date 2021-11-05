@@ -23,6 +23,9 @@ namespace CV19.ViewModels
 		public object[] CompositeCollection { get; }    // Массив разнородных типов
 
 
+		public DirectoryViewModel DiskRootDir { get; } = new DirectoryViewModel("c:\\");
+
+
 		#region SelectedGroupStudents - добавление фильтра по таблице со студентами
 
 		private string _studentFilterText;
@@ -69,7 +72,6 @@ namespace CV19.ViewModels
 		}
 
 		#endregion // SelectedGroupStudents - добавление фильтра по таблице со студентами
-
 
 
 		#region Тестирование большого списка визуальных элементов (расход памяти, виртуализованная панель)
@@ -180,7 +182,7 @@ namespace CV19.ViewModels
 		#endregion // Fields and Properties
 
 
-		#region Создание комманд (тело)
+		#region Создание комманд (тело команд)
 
 		#region CloseApplicationCommand
 
@@ -209,7 +211,7 @@ namespace CV19.ViewModels
 		#endregion
 
 
-		#region Создание и Удаление групп со студентами (две команды)
+		#region Создание и Удаление групп со студентами (бизнес-логика)
 
 		#region Создание
 		public ICommand CreateGroupCommand { get; }
@@ -251,6 +253,10 @@ namespace CV19.ViewModels
 
 		#endregion // Commands
 
+
+		/// <summary>
+		/// Конструктор класса
+		/// </summary>
 		public MainWindowViewModel()
 		{
 			#region ИНИЦИАЛИЗАЦИЯ КОММАНД!
