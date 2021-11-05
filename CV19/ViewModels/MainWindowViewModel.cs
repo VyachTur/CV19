@@ -25,6 +25,19 @@ namespace CV19.ViewModels
 
 		public DirectoryViewModel DiskRootDir { get; } = new DirectoryViewModel("c:\\");
 
+		#region SlectedDirectory - выбранная директория
+
+		private DirectoryViewModel _selectedDirectory;
+
+		public DirectoryViewModel SelectedDirectory
+		{
+			get { return _selectedDirectory; }
+			set { Set(ref _selectedDirectory, value); }
+		}
+
+
+		#endregion
+
 
 		#region SelectedGroupStudents - добавление фильтра по таблице со студентами
 
