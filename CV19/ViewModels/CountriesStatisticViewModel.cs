@@ -20,6 +20,8 @@ namespace CV19.ViewModels
 
 		private IEnumerable<CountryInfo> _countries;
 
+		private CountryInfo _selectedCountry;
+
 		#endregion // Fields
 
 		#region Properties
@@ -30,6 +32,12 @@ namespace CV19.ViewModels
 		{
 			get => _countries;
 			private set => Set(ref _countries, value);
+		}
+
+		public CountryInfo SelectedCountry
+		{
+			get => _selectedCountry;
+			set => Set(ref _selectedCountry, value);
 		}
 
 		#endregion // Properties
