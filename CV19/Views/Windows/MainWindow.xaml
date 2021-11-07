@@ -64,7 +64,7 @@
 
 		<TabControl x:Name="tbCtrl" SelectedIndex="{Binding SelectedTabIndex}">
 
-			<TabItem Header="Студенты" Visibility="Collapsed">
+			<TabItem Header="Студенты" Visibility="Visible">
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="Auto" />
