@@ -64,7 +64,11 @@
 
 		<TabControl x:Name="tbCtrl" SelectedIndex="{Binding SelectedTabIndex}">
 
-			<TabItem Header="Студенты" Visibility="Visible">
+			<TabItem Header="Статистика Covid-19" IsSelected="True">
+				
+			</TabItem>
+
+			<TabItem Header="Студенты" Visibility="Collapsed">
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="Auto" />
@@ -170,7 +174,7 @@
 				</Grid>
 			</TabItem>
 
-			<TabItem Header="Файловая система" IsSelected="True">
+			<TabItem Header="Файловая система" Visibility="Collapsed">
 				<Grid>
 					<Grid.Resources>
 						<HierarchicalDataTemplate DataType="{x:Type vm:DirectoryViewModel}"
