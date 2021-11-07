@@ -18,12 +18,22 @@ namespace CV19.ViewModels
 	{
 		#region Fields and Properties
 
-		public ObservableCollection<Group> Groups { get; }  // Группы студентов
-
-		public object[] CompositeCollection { get; }    // Массив разнородных типов
 
 
-		public DirectoryViewModel DiskRootDir { get; } = new DirectoryViewModel("c:\\");
+
+
+
+
+		#region Students, CompositeCollection, FileSystem
+
+			public ObservableCollection<Group> Groups { get; }  // Группы студентов
+
+			public object[] CompositeCollection { get; }    // Массив разнородных типов
+
+			public DirectoryViewModel DiskRootDir { get; } = new DirectoryViewModel("c:\\");
+
+		#endregion
+
 
 		#region SlectedDirectory - выбранная директория
 
@@ -197,6 +207,10 @@ namespace CV19.ViewModels
 
 		#region Создание комманд (тело команд)
 
+
+
+
+
 		#region CloseApplicationCommand
 
 		public ICommand CloseApplicationCommand { get; }
@@ -272,6 +286,12 @@ namespace CV19.ViewModels
 		/// </summary>
 		public MainWindowViewModel()
 		{
+
+
+
+
+
+
 			#region ИНИЦИАЛИЗАЦИЯ КОММАНД!
 
 			CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);  // закрытие приложения
@@ -338,11 +358,15 @@ namespace CV19.ViewModels
 			CompositeCollection = list_objects.ToArray();
 			#endregion
 
+			#region FilterStudents
 
-			_selectedGroupStudents.Filter += OnStudentFiltered;
+				_selectedGroupStudents.Filter += OnStudentFiltered;
 
-			//_selectedGroupStudents.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Descending));
-			//_selectedGroupStudents.GroupDescriptions.Add(new PropertyGroupDescription("Name"));
+				//_selectedGroupStudents.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Descending));
+				//_selectedGroupStudents.GroupDescriptions.Add(new PropertyGroupDescription("Name"));
+
+			#endregion
+
 		}
 		
 	}

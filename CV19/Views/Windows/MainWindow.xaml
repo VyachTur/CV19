@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		  xmlns:fa="http://schemas.fontawesome.com/icons/"
 		  xmlns:l="clr-namespace:CV19"
+		  xmlns:views="clr-namespace:CV19.Views"
 		  xmlns:cmd="clr-namespace:CV19.Infrastructure.Commands"
 		  xmlns:vm="clr-namespace:CV19.ViewModels"
 		  xmlns:decanat="clr-namespace:CV19.Models.Decanat"
@@ -65,7 +66,7 @@
 		<TabControl x:Name="tbCtrl" SelectedIndex="{Binding SelectedTabIndex}">
 
 			<TabItem Header="Статистика Covid-19" IsSelected="True">
-				
+				<views:CountriesStaticsicView />
 			</TabItem>
 
 			<TabItem Header="Студенты" Visibility="Collapsed">
