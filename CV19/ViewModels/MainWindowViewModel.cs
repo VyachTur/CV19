@@ -18,7 +18,7 @@ namespace CV19.ViewModels
 	{
 		#region Fields and Properties
 
-		private readonly CountriesStatisticViewModel _countriesStatisticVM;
+		private CountriesStatisticViewModel CountriesStatisticVM { get; }
 
 
 
@@ -286,7 +286,7 @@ namespace CV19.ViewModels
 		/// </summary>
 		public MainWindowViewModel()
 		{
-			_countriesStatisticVM = new CountriesStatisticViewModel(this);
+			CountriesStatisticVM = new CountriesStatisticViewModel(this);
 
 
 
