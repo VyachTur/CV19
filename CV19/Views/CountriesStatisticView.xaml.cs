@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace CV19.Views
 {
 	/// <summary>
-	/// Interaction logic for CountriesStaticsicView.xaml
+	/// Interaction logic for CountriesStatisticView.xaml
 	/// </summary>
 	public partial class CountriesStatisticView : UserControl
 	{
