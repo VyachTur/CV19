@@ -18,9 +18,9 @@ namespace CV19.Views
 	/// <summary>
 	/// Interaction logic for CountriesStaticsicView.xaml
 	/// </summary>
-	public partial class CountriesStaticsicView : UserControl
+	public partial class CountriesStatisticView : UserControl
 	{
-		public CountriesStaticsicView()
+		public CountriesStatisticView()
 		{
 			InitializeComponent();
 		}

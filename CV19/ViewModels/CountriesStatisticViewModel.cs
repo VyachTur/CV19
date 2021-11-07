@@ -54,7 +54,7 @@ namespace CV19.ViewModels
 			if (!App.IsDesignMode)
 				throw new InvalidOperationException("Конструктор без параметров предназначен для отладочного режима");
 
-			Countries = Enumerable.Range(1, 10).Select(i => new CountryInfo
+			_countries = Enumerable.Range(1, 10).Select(i => new CountryInfo
 			{
 				Name = $"Country {i}",
 				ProvinceCounts = Enumerable.Range(1, 10).Select(j => new PlaceInfo
