@@ -3,6 +3,7 @@ using CV19.Models;
 using CV19.Services;
 using CV19.ViewModels.Base;
 using OxyPlot;
+using OxyPlot.Axes;
 using OxyPlot.Series;
 using System;
 using System.Collections.Generic;
@@ -47,15 +48,12 @@ namespace CV19.ViewModels
 
 				var points_series = new LineSeries();
 
-				if (!(SelectedCountry is null))
+				foreach (var point in SelectedCountry.Counts.ToArray())
 				{
-					foreach (var point in SelectedCountry.Counts.ToArray())
-					{
-						var x = point.Date;
-						var y = point.Count;
+					var x = point.Date;
+					var y = point.Count;
 
-						points_series.Points.Add(new DataPoint(Convert.ToDouble(x.Year), y));
-					}
+					points_series.Points.Add(new DataPoint(DateTimeAxis.ToDouble(x), y));
 				}
 
 				plotCV19.Series.Add(points_series);
@@ -131,25 +129,6 @@ namespace CV19.ViewModels
 
 
 			#region Создание графика статистики Ковид
-
-			//var plotCV19 = new PlotModel { Title = "Статистика Covid-19", Subtitle = "Данные" };
-
-			//var points_series = new LineSeries();
-
-			//if (!(SelectedCountry is null))
-   //         {
-			//	foreach (var point in SelectedCountry.Counts.ToArray())
-			//	{
-			//		var x = point.Date;
-			//		var y = point.Count;
-
-			//		points_series.Points.Add(new DataPoint(Convert.ToDouble(x), y));
-			//	}
-   //         }
-
-			//plotCV19.Series.Add(points_series);
-
-   //         PlotModelCV19 = plotCV19;
 
 
 			////#region Создание графика синусоиды (наполнение данными)
