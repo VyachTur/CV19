@@ -199,10 +199,6 @@ namespace CV19.ViewModels
 
 		#region Создание комманд (тело команд)
 
-
-
-
-
 		#region CloseApplicationCommand
 
 		public ICommand CloseApplicationCommand { get; }
