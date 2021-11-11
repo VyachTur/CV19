@@ -76,7 +76,11 @@
 							<conv:Linear K="-3" B="5" />
 						</conv:CompositeConverter.Second>
 					</conv:CompositeConverter>
+
+					<conv:ToListConverter x:Key="ToListConv" />
+					
 				</Grid.Resources>
+				
 				<Grid.RowDefinitions>
 					<RowDefinition />
 					<RowDefinition Height="Auto" />
@@ -91,8 +95,34 @@
 							VerticalAlignment="Top" HorizontalAlignment="Left" Width=" 100"
 							  Text="{Binding ElementName=ValueSlider, Path=Value, Converter={StaticResource TestConverter}, UpdateSourceTrigger=PropertyChanged}" />
 
-				<ListBox Grid.Row="2" />
+				
+				<StackPanel Grid.Row="2">
+					
+					<Slider Grid.Row="0" Name="Value1" Maximum="100" 
+						  ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Value}" />
+					<Slider Grid.Row="0" Name="Value2" Maximum="100" 
+						  ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Value}" />
+					<Slider Grid.Row="0" Name="Value3" Maximum="100" 
+						  ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Value}" />
+					<Slider Grid.Row="0" Name="Value4" Maximum="100" 
+						  ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Value}" />
+					<Slider Grid.Row="0" Name="Value5" Maximum="100" 
+						  ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Value}" />
 
+					<ListBox>
+						<ListBox.ItemsSource>
+							<MultiBinding Converter="{StaticResource ToListConv}">
+								<Binding ElementName="Value1" Path="Value" />
+								<Binding ElementName="Value2" Path="Value" />
+								<Binding ElementName="Value3" Path="Value" />
+								<Binding ElementName="Value4" Path="Value" />
+								<Binding ElementName="Value5" Path="Value" />
+							</MultiBinding>
+						</ListBox.ItemsSource>
+					</ListBox>
+					
+				</StackPanel>
+				
 			</Grid>
 		</GroupBox>
 
