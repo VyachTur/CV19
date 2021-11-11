@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Markup;
 
 namespace CV19.ViewModels.Base
 {
-	internal abstract class ViewModel : INotifyPropertyChanged, IDisposable
+	internal abstract class ViewModel : MarkupExtension, INotifyPropertyChanged, IDisposable
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -24,7 +25,13 @@ namespace CV19.ViewModels.Base
 		}
 
 
-		public void Dispose()
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return this;
+        }
+
+
+        public void Dispose()
 		{
 			Dispose(true);
 		}

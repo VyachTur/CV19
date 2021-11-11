@@ -10,6 +10,7 @@
 	xmlns:m="clr-namespace:CV19.Models"
 	xmlns:conv="clr-namespace:CV19.Infrastructure.Converters"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf"
 	d:DataContext="{d:DesignInstance vm:CountriesStatisticViewModel, d:IsDesignTimeCreatable=True}"
 	d:DesignHeight="450"
 	d:DesignWidth="800"
@@ -65,7 +66,7 @@
 
 		<GroupBox Grid.Column="2" Header="Информация">
 			<Grid>
-				<Grid.Resources>
+				<!--<Grid.Resources>
 					<conv:Ratio K="2" x:Key="Ratio2" />
 					<conv:Linear K="5" B="3" x:Key="Linear_K5_B3" />
 
@@ -80,7 +81,7 @@
 
 					<conv:ToListConverter x:Key="ToListConv" />
 					
-				</Grid.Resources>
+				</Grid.Resources>-->
 				
 				<Grid.RowDefinitions>
 					<RowDefinition />
@@ -88,9 +89,14 @@
 					<RowDefinition />
 				</Grid.RowDefinitions>
 
-				<GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" />
+                <oxy:PlotView Model="{Binding PlotModelCV19}" />
 
-				<Slider Grid.Row="0" Name="ValueSlider" Maximum="100" 
+                <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" />
+
+                
+                
+                
+				<!--<Slider Grid.Row="0" Name="ValueSlider" Maximum="100" 
 						  ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Value}" />
 				<TextBox Grid.Row="0" Margin="5,30,0,0" 
 							VerticalAlignment="Top" HorizontalAlignment="Left" Width=" 100"
@@ -115,21 +121,10 @@
                             <common:StringToIntArray Str='22,4,8,99,55,124'></common:StringToIntArray>
                         </Border.DataContext>
                         <ListBox ItemsSource="{Binding}">
-
-
-                            <!--<ListBox.ItemsSource>
-							<MultiBinding Converter="{StaticResource ToListConv}">
-								<Binding ElementName="Value1" Path="Value" />
-								<Binding ElementName="Value2" Path="Value" />
-								<Binding ElementName="Value3" Path="Value" />
-								<Binding ElementName="Value4" Path="Value" />
-								<Binding ElementName="Value5" Path="Value" />
-							</MultiBinding>
-						</ListBox.ItemsSource>-->
                         </ListBox>
                     </Border>
 					
-				</StackPanel>
+				</StackPanel>-->
 				
 			</Grid>
 		</GroupBox>

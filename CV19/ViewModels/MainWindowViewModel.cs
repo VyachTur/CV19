@@ -11,9 +11,11 @@ using CV19.Models.Decanat;
 using System.Linq;
 using System.Windows.Data;
 using System.ComponentModel;
+using System.Windows.Markup;
 
 namespace CV19.ViewModels
 {
+	[MarkupExtensionReturnType(typeof(MainWindowViewModel))]
 	internal class MainWindowViewModel : ViewModel
 	{
 		#region Fields and Properties
@@ -141,20 +143,11 @@ namespace CV19.ViewModels
 			set => Set(ref _selectedTabIndex, value);
 		}
 
-		#endregion // Изменение вкладок по нажатию "вперед" и "назад"
+        #endregion // Изменение вкладок по нажатию "вперед" и "назад"
 
-		#region TestPlotModel : IEnumerable<DataPoint> - Тестовый набор данных для визуализации графиков
+        #region TestPlotModel SIN
 
-		//private IEnumerable<DataPoint> _testDataPoints;
-
-		//public IEnumerable<DataPoint> TestDataPoints 
-		//{ 
-		//	get => _testDataPoints; 
-		//	set => Set(ref _testDataPoints, value); 
-		//}
-
-
-		private PlotModel _testPlotModel;
+        private PlotModel _testPlotModel;
 
 		public PlotModel TestPlotModel
 		{
@@ -162,7 +155,7 @@ namespace CV19.ViewModels
 			set => Set(ref _testPlotModel, value);
 		}
 
-		#endregion // TestPlotModel
+		#endregion // TestPlotModel SIN
 
 		#region Title
 
@@ -298,11 +291,12 @@ namespace CV19.ViewModels
 			CreateGroupCommand = new LambdaCommand(OnCreateGroupCommandExecute, CanCreateGroupCommandExecute);                  // создание группы со студентами
 			DeleteGroupCommand = new LambdaCommand(OnDeleteGroupCommandExecute, CanDeleteGroupCommandExecute);                  // удаление группы со студентами
 
-			#endregion // ИНИЦИАЛИЗАЦИЯ КОММАНД!
+            #endregion // ИНИЦИАЛИЗАЦИЯ КОММАНД!
 
-			#region Создание графика синусоиды (наполнение данными)
 
-			var plotM = new PlotModel { Title = "Синусоида", Subtitle = "Проба OxyPlot" };
+            #region Создание графика синусоиды (наполнение данными)
+
+            var plotM = new PlotModel { Title = "Синусоида", Subtitle = "Проба OxyPlot" };
 
 			var point_series = new LineSeries();
 

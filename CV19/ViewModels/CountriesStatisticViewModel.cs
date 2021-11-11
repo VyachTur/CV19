@@ -2,6 +2,7 @@
 using CV19.Models;
 using CV19.Services;
 using CV19.ViewModels.Base;
+using OxyPlot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,20 @@ namespace CV19.ViewModels
 			get => _selectedCountry;
 			set => Set(ref _selectedCountry, value);
 		}
+
+
+		#region PlotModel CV19
+
+		private PlotModel _plotModelCV19;
+
+		public PlotModel PlotModelCV19
+		{
+			get => _plotModelCV19;
+			set => Set(ref _plotModelCV19, value);
+		}
+
+		#endregion // PlotModel CV19
+
 
 		#endregion // Properties
 
@@ -89,6 +104,45 @@ namespace CV19.ViewModels
 			_dataService = new DataService();
 
 			RefreshDataCommand = new LambdaCommand(OnRefreshDataCommand);
+
+
+
+			#region Создание графика статистики Ковид
+
+			var plotCV19 = new PlotModel { Title = "Статистика Covid-19", Subtitle = "Данные" };
+
+
+
+
+
+
+			PlotModelCV19 = plotCV19;
+
+
+			////#region Создание графика синусоиды (наполнение данными)
+
+			////var plotM = new PlotModel { Title = "Синусоида", Subtitle = "Проба OxyPlot" };
+
+			////var point_series = new LineSeries();
+
+			//////var data_points = new List<DataPoint>((int)(360 / 0.1));
+			////for (var x = 0d; x < 360; x += 0.1)
+			////{
+			////	const double to_rad = Math.PI / 180;
+			////	var y = Math.Sin(x * to_rad);
+
+			////	point_series.Points.Add(new DataPoint(x, y));
+			////}
+
+			////plotM.Series.Add(point_series);
+
+			////TestPlotModel = plotM;
+
+			////#endregion // Создание графика синусоиды (наполнение данными)
+
+
+
+			#endregion // Создание графика статистики Ковид
 
 		}
 	}
