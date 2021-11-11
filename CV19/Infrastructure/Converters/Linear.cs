@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Markup;
 
 namespace CV19.Infrastructure.Converters
 {
@@ -14,11 +15,21 @@ namespace CV19.Infrastructure.Converters
 	/// </summary>
 	internal class Linear : Converter
 	{
+		//[ConstructorArgument("K")]
 		public double K { get; set; } = 1;
 
+		//[ConstructorArgument("B")]
 		public double B { get; set; }
 
-		public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+
+        public Linear() { }
+
+        public Linear(double k) => K = k;
+
+        public Linear(double k, double b) : this(k) => B = b;
+
+
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			if (value is null) return null;
 

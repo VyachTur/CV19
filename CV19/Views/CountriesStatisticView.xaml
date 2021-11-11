@@ -5,6 +5,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:fa="http://schemas.fontawesome.com/icons/"
 	xmlns:local="clr-namespace:CV19"
+    xmlns:common="clr-namespace:CV19.Infrastructure.Common"
 	xmlns:vm="clr-namespace:CV19.ViewModels"
 	xmlns:m="clr-namespace:CV19.Models"
 	xmlns:conv="clr-namespace:CV19.Infrastructure.Converters"
@@ -99,7 +100,7 @@
 				<StackPanel Grid.Row="2">
 					
 					<Slider Grid.Row="0" Name="Value1" Maximum="100" 
-						  ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Value}" />
+						  ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Value, Converter={conv:Linear 5}}" />
 					<Slider Grid.Row="0" Name="Value2" Maximum="100" 
 						  ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Value}" />
 					<Slider Grid.Row="0" Name="Value3" Maximum="100" 
@@ -109,8 +110,14 @@
 					<Slider Grid.Row="0" Name="Value5" Maximum="100" 
 						  ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Value}" />
 
-					<ListBox>
-						<ListBox.ItemsSource>
+                    <Border>
+                        <Border.DataContext>
+                            <common:StringToIntArray Str='22,4,8,99,55,124'></common:StringToIntArray>
+                        </Border.DataContext>
+                        <ListBox ItemsSource="{Binding}">
+
+
+                            <!--<ListBox.ItemsSource>
 							<MultiBinding Converter="{StaticResource ToListConv}">
 								<Binding ElementName="Value1" Path="Value" />
 								<Binding ElementName="Value2" Path="Value" />
@@ -118,8 +125,9 @@
 								<Binding ElementName="Value4" Path="Value" />
 								<Binding ElementName="Value5" Path="Value" />
 							</MultiBinding>
-						</ListBox.ItemsSource>
-					</ListBox>
+						</ListBox.ItemsSource>-->
+                        </ListBox>
+                    </Border>
 					
 				</StackPanel>
 				
