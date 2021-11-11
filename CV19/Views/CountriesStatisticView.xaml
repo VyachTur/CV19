@@ -64,6 +64,19 @@
 
 		<GroupBox Grid.Column="2" Header="Информация">
 			<Grid>
+				<Grid.Resources>
+					<conv:Ratio K="2" x:Key="Ratio2" />
+					<conv:Linear K="5" B="3" x:Key="Linear_K5_B3" />
+
+					<conv:CompositeConverter x:Key="TestConverter">
+						<conv:CompositeConverter.First>
+							<conv:Linear K="5" />
+						</conv:CompositeConverter.First>
+						<conv:CompositeConverter.Second>
+							<conv:Linear K="-3" B="5" />
+						</conv:CompositeConverter.Second>
+					</conv:CompositeConverter>
+				</Grid.Resources>
 				<Grid.RowDefinitions>
 					<RowDefinition />
 					<RowDefinition Height="Auto" />
@@ -72,8 +85,11 @@
 
 				<GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" />
 
-				<Slider Grid.Row="0" Name="ValueSlider" />
-				<TextBlock Grid.Row="0" Margin="0,30,0,0" Text="{Binding ElementName=ValueSlider, Path=Value}" />
+				<Slider Grid.Row="0" Name="ValueSlider" Maximum="100" 
+						  ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Value}" />
+				<TextBox Grid.Row="0" Margin="5,30,0,0" 
+							VerticalAlignment="Top" HorizontalAlignment="Left" Width=" 100"
+							  Text="{Binding ElementName=ValueSlider, Path=Value, Converter={StaticResource TestConverter}, UpdateSourceTrigger=PropertyChanged}" />
 
 				<ListBox Grid.Row="2" />
 
