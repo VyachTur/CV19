@@ -11,6 +11,7 @@
 	xmlns:conv="clr-namespace:CV19.Infrastructure.Converters"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf"
+    xmlns:map="clr-namespace:MapControl;assembly=MapControl.WPF"
 	d:DataContext="{d:DesignInstance vm:CountriesStatisticViewModel, d:IsDesignTimeCreatable=True}"
 	d:DesignHeight="450"
 	d:DesignWidth="800"
@@ -93,7 +94,11 @@
 
                 <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" />
 
-                
+                <map:Map Grid.Row="2" ZoomLevel="6" MaxZoomLevel="21" Center="{Binding SelectedCountry.Location, Converter={conv:PointToMapLocation}}">
+                    <map:MapScale Margin="4" Opacity="1" Background="Transparent" VerticalAlignment="Bottom" />
+                    <map:MapGraticule Opacity="0.3" Background="Transparent" />
+                    <map:MapTileLayer TileSource="http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png" />
+                </map:Map>
                 
                 
 				<!--<Slider Grid.Row="0" Name="ValueSlider" Maximum="100" 
