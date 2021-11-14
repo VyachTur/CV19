@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -15,8 +16,6 @@ namespace CV19.Services
 	internal class DataService
 	{
 		private const string _DataSourceAddress = @"https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv";
-
-		private const string pattern = @",(?=\S)";
 
 		private static async Task<Stream> GetDataStream()
 		{
@@ -30,7 +29,7 @@ namespace CV19.Services
 
 		private static IEnumerable<string> GetDataLines()
 		{
-			using var data_stream = GetDataStream().Result;
+			using var data_stream = (SynchronizationContext.Current is null ? GetDataStream() : Task.Run(GetDataStream)).Result;
 			using var data_reader = new StreamReader(data_stream);
 
 			while (!data_reader.EndOfStream)
@@ -40,6 +39,9 @@ namespace CV19.Services
 				yield return line;
 			}
 		}
+
+
+		private const string pattern = @",(?=\S)";
 
 		private static String[] ParseStringCSV(string input, string pattern) => Regex.Split(input, pattern);
 
@@ -60,8 +62,16 @@ namespace CV19.Services
 
 				var province_name = row[0].Trim();
 				var country_name = row[1].Trim(' ', '"');
-				var latitude = double.Parse(row[2]);
-				var longitude = double.Parse(row[3]);
+				//var latitude = double.Parse(row[2]);
+				//var longitude = double.Parse(row[3]);
+
+				NumberStyles style = NumberStyles.AllowDecimalPoint;
+				IFormatProvider formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
+				double latitude;
+				double longitude;
+				Double.TryParse(row[2], style, formatter, out latitude);
+				Double.TryParse(row[3], style, formatter, out longitude);
+
 				var other_values = row.Skip(4).Select(int.Parse).ToArray();
 
 				yield return (province_name, country_name, (latitude, longitude), other_values);
