@@ -116,58 +116,62 @@ namespace CV19.ViewModels
 
 		private void MakePlotStatCV19()
         {
-			var plotCV19 = new PlotModel 
-							{ 
-								Title = "Статистика Covid-19", 
-								TitleFontSize = 22,
-								Subtitle = SelectedCountry.Name,
-								SubtitleFontSize = 18,
-								SubtitleFontWeight = OxyPlot.FontWeights.Bold,
-								PlotType = PlotType.XY
-							};
+			if (SelectedCountry != null)
+            {
+				var plotCV19 = new PlotModel 
+								{ 
+									Title = "Статистика Covid-19", 
+									TitleFontSize = 22,
+									Subtitle = SelectedCountry.Name,
+									SubtitleFontSize = 18,
+									SubtitleFontWeight = OxyPlot.FontWeights.Bold,
+									PlotType = PlotType.XY
+								};
 
-			var x_axis = new DateTimeAxis
-			{
-				Position = AxisPosition.Bottom,
-				Title = "Дата",
-				AxisTitleDistance = 6,
-				TitleFontWeight = OxyPlot.FontWeights.Bold,
-				StringFormat = "dd.MM.yyyy",
-                MajorGridlineStyle = LineStyle.Solid,
-                MinorGridlineStyle = LineStyle.Dot
-            };
+				var x_axis = new DateTimeAxis
+				{
+					Position = AxisPosition.Bottom,
+					Title = "Дата",
+					AxisTitleDistance = 6,
+					TitleFontWeight = OxyPlot.FontWeights.Bold,
+					StringFormat = "dd.MM.yyyy",
+					MajorGridlineStyle = LineStyle.Solid,
+					MinorGridlineStyle = LineStyle.Dot
+				};
 
-			plotCV19.Axes.Add(x_axis);
+				plotCV19.Axes.Add(x_axis);
 
-			var y_axis = new LinearAxis
-			{
-				Position = AxisPosition.Left,
-				Title = "Количество заболевших",
-				AxisTitleDistance = 6,
-				TitleFontWeight = OxyPlot.FontWeights.Bold,
-				MajorGridlineStyle = LineStyle.Solid,
-                MinorGridlineStyle = LineStyle.Dot
-            };
+				var y_axis = new LinearAxis
+				{
+					Position = AxisPosition.Left,
+					Title = "Количество заболевших",
+					AxisTitleDistance = 6,
+					TitleFontWeight = OxyPlot.FontWeights.Bold,
+					MajorGridlineStyle = LineStyle.Solid,
+					MinorGridlineStyle = LineStyle.Dot
+				};
 
-			plotCV19.Axes.Add(y_axis);
+				plotCV19.Axes.Add(y_axis);
 
-            var points_series = new LineSeries
-			{
-				Color = OxyColor.FromRgb(255, 0, 0),
-				StrokeThickness = 2
-            };
+				var points_series = new LineSeries
+				{
+					Color = OxyColor.FromRgb(255, 0, 0),
+					StrokeThickness = 2
+				};
 
-			foreach (var point in SelectedCountry.Counts.ToArray())
-			{
-				var x = point.Date;
-				var y = point.Count;
+				foreach (var point in SelectedCountry.Counts.ToArray())
+				{
+					var x = point.Date;
+					var y = point.Count;
 
-				points_series.Points.Add(new DataPoint(DateTimeAxis.ToDouble(x), y));
-			}
+					points_series.Points.Add(new DataPoint(DateTimeAxis.ToDouble(x), y));
+				}
 
-			plotCV19.Series.Add(points_series);
+				plotCV19.Series.Add(points_series);
 
-			PlotModelCV19 = plotCV19;
+				PlotModelCV19 = plotCV19;
+            }
+
         }
 
 		#endregion // Создание графика статистики Ковид
