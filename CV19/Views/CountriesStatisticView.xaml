@@ -20,7 +20,7 @@
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="Auto" />
-			<ColumnDefinition Width="2*" />
+			<ColumnDefinition Width="3*" />
 		</Grid.ColumnDefinitions>
 
 		<GridSplitter Grid.Column="1" VerticalAlignment="Stretch" />
