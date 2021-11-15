@@ -2,6 +2,7 @@
 using CV19.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using System.Linq;
 using System.Windows;
 
@@ -11,16 +12,27 @@ namespace CV19
 	{
 		public static bool IsDesignMode { get; private set; } = true;
 
-		protected override void OnStartup(StartupEventArgs e)
+		private static IHost _host;
+
+		public static IHost Host => _host ??= Program.CreateHostBuilder(Environment.GetCommandLineArgs()).Build();
+
+		protected override async void OnStartup(StartupEventArgs e)
 		{
 			IsDesignMode = false;
+			var host = Host;
 			base.OnStartup(e);
 
-			//var service_test = new DataService();
-			//var countries = service_test.GetData().ToArray();
+			await host.StartAsync().ConfigureAwait(false);
+			host.Dispose();
+			_host = null;
 		}
 
-		public static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
+        protected override void OnExit(ExitEventArgs e)
+        {
+            base.OnExit(e);
+        }
+
+        public static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
         {
 			services.AddSingleton<DataService>();
 			services.AddSingleton<CountriesStatisticViewModel>();
