@@ -5,10 +5,8 @@ using CV19.ViewModels.Base;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 
 namespace CV19.ViewModels
@@ -27,7 +25,7 @@ namespace CV19.ViewModels
 
 		#region Properties
 
-		private MainWindowViewModel MainVM { get; }
+		public MainWindowViewModel MainVM { get; internal set; }
 
 		public IEnumerable<CountryInfo> Countries
 		{
@@ -77,36 +75,34 @@ namespace CV19.ViewModels
 		/// <summary>
 		/// Отладочный конструктор для дизайнера xaml
 		/// </summary>
-		public CountriesStatisticViewModel() : this(null) 
-		{
-			if (!App.IsDesignMode)
-				throw new InvalidOperationException("Конструктор без параметров предназначен для отладочного режима");
+		//public CountriesStatisticViewModel() : this(null) 
+		//{
+		//	if (!App.IsDesignMode)
+		//		throw new InvalidOperationException("Конструктор без параметров предназначен для отладочного режима");
 
-			_countries = Enumerable.Range(1, 10).Select(i => new CountryInfo
-			{
-				Name = $"Country {i}",
-				ProvinceCounts = Enumerable.Range(1, 10).Select(j => new PlaceInfo
-				{
-					Name = $"Province {i}",
-					Location = new Point(i,j),
-					Counts = Enumerable.Range(1,10).Select(k => new ConfirmedCount
-					{
-						Date = DateTime.Now.Subtract(TimeSpan.FromDays(100 - k)),
-						Count = k
-					}).ToArray()
-				}).ToArray()
-			}).ToArray();
-		}
+		//	_countries = Enumerable.Range(1, 10).Select(i => new CountryInfo
+		//	{
+		//		Name = $"Country {i}",
+		//		ProvinceCounts = Enumerable.Range(1, 10).Select(j => new PlaceInfo
+		//		{
+		//			Name = $"Province {i}",
+		//			Location = new Point(i,j),
+		//			Counts = Enumerable.Range(1,10).Select(k => new ConfirmedCount
+		//			{
+		//				Date = DateTime.Now.Subtract(TimeSpan.FromDays(100 - k)),
+		//				Count = k
+		//			}).ToArray()
+		//		}).ToArray()
+		//	}).ToArray();
+		//}
 
 		/// <summary>
 		/// Конструктор
 		/// </summary>
 		/// <param name="viewModel"></param>
-		public CountriesStatisticViewModel(MainWindowViewModel viewModel)
+		public CountriesStatisticViewModel(DataService dataService)
 		{
-			MainVM = viewModel;
-
-			_dataService = new DataService();
+			_dataService = dataService;
 
 			RefreshDataCommand = new LambdaCommand(OnRefreshDataCommand);
 		}
