@@ -1,6 +1,7 @@
 ﻿using CV19.Infrastructure.Commands;
 using CV19.Models;
 using CV19.Services;
+using CV19.Services.Interfaces;
 using CV19.ViewModels.Base;
 using OxyPlot;
 using OxyPlot.Axes;
@@ -15,7 +16,7 @@ namespace CV19.ViewModels
 	{
 		#region Fields
 
-		private DataService _dataService;
+		private IDataService _dataService;
 
 		private IEnumerable<CountryInfo> _countries;
 
@@ -100,7 +101,7 @@ namespace CV19.ViewModels
 		/// Конструктор
 		/// </summary>
 		/// <param name="viewModel"></param>
-		public CountriesStatisticViewModel(DataService dataService)
+		public CountriesStatisticViewModel(IDataService dataService)
 		{
 			_dataService = dataService;
 

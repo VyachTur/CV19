@@ -1,11 +1,11 @@
 ﻿using CV19.Models;
+using CV19.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,9 +13,15 @@ using System.Windows;
 
 namespace CV19.Services
 {
-	internal class DataService
+	internal class DataService : IDataService
 	{
 		private const string _DataSourceAddress = @"https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv";
+
+		// Конструктор
+        public DataService()
+        {
+
+        }
 
 		private static async Task<Stream> GetDataStream()
 		{
@@ -77,6 +83,8 @@ namespace CV19.Services
 				yield return (province_name, country_name, (latitude, longitude), other_values);
 			}
 		}
+
+
 
 		public IEnumerable<CountryInfo> GetData()
 		{
