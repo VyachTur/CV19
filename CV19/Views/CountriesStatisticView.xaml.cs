@@ -1,15 +1,10 @@
-﻿using System.Windows.Controls;
-
-namespace CV19.Views
+﻿namespace CV19.Views
 {
 	/// <summary>
 	/// Interaction logic for CountriesStatisticView.xaml
 	/// </summary>
-	public partial class CountriesStatisticView : UserControl
+	public partial class CountriesStatisticView
 	{
-		public CountriesStatisticView()
-		{
-			InitializeComponent();
-		}
+		public CountriesStatisticView() => InitializeComponent();
 	}
 }

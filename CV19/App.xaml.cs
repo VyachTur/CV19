@@ -4,13 +4,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 
 namespace CV19
 {
-	public partial class App : Application
+	public partial class App
 	{
 		public static bool IsDesignMode { get; private set; } = true;
 
