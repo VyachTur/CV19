@@ -272,9 +272,12 @@ namespace CV19.ViewModels
 		/// <summary>
 		/// Конструктор класса
 		/// </summary>
-		public MainWindowViewModel()
+		public MainWindowViewModel(CountriesStatisticViewModel Statistic)
 		{
-			CountriesStatisticVM = new CountriesStatisticViewModel(this);
+			CountriesStatisticVM = Statistic;
+			Statistic.MainVM = this;
+
+			//CountriesStatisticVM = new CountriesStatisticViewModel(this);
 
 
 
