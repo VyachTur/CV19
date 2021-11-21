@@ -9,6 +9,7 @@
 		xmlns:cmd="clr-namespace:CV19.Infrastructure.Commands"
 		xmlns:vm="clr-namespace:CV19.ViewModels"
 		xmlns:decanat="clr-namespace:CV19.Models.Decanat"
+        xmlns:components="clr-namespace:CV19.Components"
         mc:Ignorable="d"
 		xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf"
 		Title="{Binding Title}"
@@ -66,7 +67,7 @@
 
 		<TabControl x:Name="tbCtrl" SelectedIndex="{Binding SelectedTabIndex}">
 
-			<TabItem Header="Статистика Covid-19" IsSelected="True">
+			<TabItem Header="Статистика Covid-19" IsSelected="False" Visibility="Collapsed">
 				<views:CountriesStatisticView DataContext="{Binding CountriesStatisticVM}" />
 			</TabItem>
 
@@ -287,9 +288,18 @@
 				</Grid>
 			</TabItem>
 
-			<TabItem Header="График" Visibility="Visible">
+			<TabItem Header="График" Visibility="Collapsed">
 				<oxy:PlotView Model="{Binding TestPlotModel}" />
 			</TabItem>
+
+            <TabItem Header="DepProp GaugeIndicator" IsSelected="True">
+                <Grid>
+                    <components:GaugeIndicator VerticalAlignment="Top" HorizontalAlignment="Left"
+                                               Width="80" Height="80" Value="{Binding FuelControl}" />
+                    <Slider VerticalAlignment="Top" HorizontalAlignment="Stretch"
+                            Minimum="0" Maximum="100" Value="{Binding FuelControl}" />
+                </Grid>
+            </TabItem>
 
         </TabControl>
 	</DockPanel>

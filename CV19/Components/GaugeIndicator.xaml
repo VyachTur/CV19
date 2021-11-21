@@ -17,7 +17,7 @@
                     <Line.RenderTransform>
                         <TransformGroup>
                             <RotateTransform Angle="-50" />
-                            <RotateTransform Angle="100" />
+                            <RotateTransform Angle="{Binding Value, RelativeSource={RelativeSource AncestorType=local:GaugeIndicator}}" />
                         </TransformGroup>
                     </Line.RenderTransform>
                 </Line>

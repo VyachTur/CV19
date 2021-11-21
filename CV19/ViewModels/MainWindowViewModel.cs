@@ -24,10 +24,23 @@ namespace CV19.ViewModels
 
 
 
+		#region DependencyProperty FuelControl
 
-		#region Students, CompositeCollection, FileSystem
+        private double _fuelControl;
 
-			public ObservableCollection<Group> Groups { get; }  // Группы студентов
+        public double FuelControl
+        {
+            get => _fuelControl;
+            set => Set(ref _fuelControl, value);
+        }
+
+
+        #endregion
+
+
+        #region Students, CompositeCollection, FileSystem
+
+        public ObservableCollection<Group> Groups { get; }  // Группы студентов
 
 			public object[] CompositeCollection { get; }    // Массив разнородных типов
 
