@@ -9,6 +9,8 @@
 		xmlns:cmd="clr-namespace:CV19.Infrastructure.Commands"
 		xmlns:vm="clr-namespace:CV19.ViewModels"
 		xmlns:decanat="clr-namespace:CV19.Models.Decanat"
+        xmlns:components="clr-namespace:CV19.Components"
+        xmlns:converters="clr-namespace:CV19.Infrastructure.Converters"
         mc:Ignorable="d"
 		xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf"
 		Title="{Binding Title}"
@@ -66,7 +68,7 @@
 
 		<TabControl x:Name="tbCtrl" SelectedIndex="{Binding SelectedTabIndex}">
 
-			<TabItem Header="Статистика Covid-19" IsSelected="True">
+			<TabItem Header="Статистика Covid-19" IsSelected="False" Visibility="Collapsed">
 				<views:CountriesStatisticView DataContext="{Binding CountriesStatisticVM}" />
 			</TabItem>
 
@@ -287,9 +289,32 @@
 				</Grid>
 			</TabItem>
 
-			<TabItem Header="График" Visibility="Visible">
+			<TabItem Header="График" Visibility="Collapsed">
 				<oxy:PlotView Model="{Binding TestPlotModel}" />
 			</TabItem>
+
+            <TabItem Header="DepProp GaugeIndicator" IsSelected="True" Visibility="Visible">
+                <Grid>
+                    <Grid.Resources>
+                        <converters:ParametricMultiplyValueConverter x:Key="Mult" Value="{Binding Coefficient}" />
+                    </Grid.Resources>
+                    <components:GaugeIndicator VerticalAlignment="Top" HorizontalAlignment="Left"
+                                               Width="80" Height="80">
+                        <components:GaugeIndicator.Value>
+                            <Binding Path="FuelControl" Converter="{StaticResource Mult}" />
+                        </components:GaugeIndicator.Value>
+                    </components:GaugeIndicator>
+                    
+                    <Slider VerticalAlignment="Top" HorizontalAlignment="Stretch"
+                            Minimum="0" Maximum="100" Value="{Binding FuelControl}"
+                            ToolTip="{Binding FuelControl}" />
+                    
+                    <Slider VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0,80,0,0"
+                            Minimum="-10" Maximum="10" SmallChange="0.1"
+                            Value="{Binding Coefficient}"
+                            ToolTip="{Binding Coefficient}" />
+                </Grid>
+            </TabItem>
 
         </TabControl>
 	</DockPanel>

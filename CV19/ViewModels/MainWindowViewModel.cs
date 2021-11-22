@@ -25,9 +25,37 @@ namespace CV19.ViewModels
 
 
 
-		#region Students, CompositeCollection, FileSystem
+		#region DependencyProperty Coefficient
 
-			public ObservableCollection<Group> Groups { get; }  // Группы студентов
+		private double _coefficient = 1;
+
+		public double Coefficient
+		{
+			get => _coefficient;
+			set => Set(ref _coefficient, value);
+		}
+
+
+		#endregion
+
+
+		#region DependencyProperty FuelControl
+
+		private double _fuelControl;
+
+        public double FuelControl
+        {
+            get => _fuelControl;
+            set => Set(ref _fuelControl, value);
+        }
+
+
+        #endregion
+
+
+        #region Students, CompositeCollection, FileSystem
+
+        public ObservableCollection<Group> Groups { get; }  // Группы студентов
 
 			public object[] CompositeCollection { get; }    // Массив разнородных типов
 
