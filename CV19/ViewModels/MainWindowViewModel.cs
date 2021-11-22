@@ -24,9 +24,24 @@ namespace CV19.ViewModels
 
 
 
+
+		#region DependencyProperty Coefficient
+
+		private double _coefficient = 1;
+
+		public double Coefficient
+		{
+			get => _coefficient;
+			set => Set(ref _coefficient, value);
+		}
+
+
+		#endregion
+
+
 		#region DependencyProperty FuelControl
 
-        private double _fuelControl;
+		private double _fuelControl;
 
         public double FuelControl
         {

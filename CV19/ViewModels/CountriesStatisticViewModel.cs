@@ -6,6 +6,7 @@ using CV19.ViewModels.Base;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
+using OxyPlot.Wpf;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
@@ -167,7 +168,11 @@ namespace CV19.ViewModels
 				plotCV19.Series.Add(points_series);
 
 				PlotModelCV19 = plotCV19;
-            }
+
+				//// Сохранение графика в png-картинку
+				//var pngExporter = new PngExporter { Width = 1920, Height = 1080, Resolution = 154.0 };
+				//pngExporter.ExportToFile(plotCV19, ".\\plot.png");
+			}
 
         }
 
