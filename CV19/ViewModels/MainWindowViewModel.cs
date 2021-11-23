@@ -12,6 +12,7 @@ using System.Linq;
 using System.Windows.Data;
 using System.ComponentModel;
 using System.Windows.Markup;
+using CV19.Services.Interfaces;
 
 namespace CV19.ViewModels
 {
@@ -22,7 +23,7 @@ namespace CV19.ViewModels
 
 		public CountriesStatisticViewModel CountriesStatisticVM { get; }
 
-
+		private readonly IAsyncDataService _asyncData;
 
 
 		#region DependencyProperty Coefficient
@@ -300,7 +301,7 @@ namespace CV19.ViewModels
 		/// <summary>
 		/// Конструктор класса
 		/// </summary>
-		public MainWindowViewModel(CountriesStatisticViewModel Statistic)
+		public MainWindowViewModel(CountriesStatisticViewModel Statistic, IAsyncDataService asyncData)
 		{
 			CountriesStatisticVM = Statistic;
 			Statistic.MainVM = this;
