@@ -14,6 +14,7 @@ using System.ComponentModel;
 using System.Windows.Markup;
 using CV19.Services.Interfaces;
 using CV19.Services;
+using System.Threading;
 
 namespace CV19.ViewModels
 {
@@ -309,15 +310,16 @@ namespace CV19.ViewModels
 
 		private void OnStartProcessCommandExecuted(object p)
         {
-			DataValue = _asyncData.GetResult(DateTime.Now);
+			new Thread(() => DataValue = _asyncData.GetResult(DateTime.Now)).Start();
         }
 
-		#endregion // StartProcessCommand
+
+        #endregion // StartProcessCommand
 
 
-		#region StopProcessCommand
+        #region StopProcessCommand
 
-		public ICommand StopProcessCommand { get; }
+        public ICommand StopProcessCommand { get; }
 
 		private bool CanStopProcessCommandExecute(object p) => true;
 

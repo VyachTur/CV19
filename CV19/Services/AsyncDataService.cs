@@ -12,7 +12,7 @@ namespace CV19.Services
         {
             Thread.Sleep(_sleepTime);
 
-            return $"Result = {time}";
+            return $"Result: {time}";
         }
     }
 }
