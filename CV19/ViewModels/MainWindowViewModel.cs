@@ -13,6 +13,7 @@ using System.Windows.Data;
 using System.ComponentModel;
 using System.Windows.Markup;
 using CV19.Services.Interfaces;
+using CV19.Services;
 
 namespace CV19.ViewModels
 {
@@ -24,6 +25,10 @@ namespace CV19.ViewModels
 		public CountriesStatisticViewModel CountriesStatisticVM { get; }
 
 		private readonly IAsyncDataService _asyncData;
+
+		private string _dataValue;
+
+		public string DataValue { get => _dataValue; set => Set(ref _dataValue, value); }
 
 
 		#region DependencyProperty Coefficient
@@ -291,9 +296,38 @@ namespace CV19.ViewModels
 				SelectedGroup = group_index < Groups.Count ? Groups[group_index] : SelectedGroup = Groups[group_index - 1];
 			}
 		}
-		#endregion // Удаление
+        #endregion // Удаление
 
-		#endregion // Создание и Удаление групп со студентами (две команды)
+        #endregion // Создание и Удаление групп со студентами (две команды)
+
+
+        #region StartProcessCommand
+
+		public ICommand StartProcessCommand { get; }
+
+		private bool CanStartProcessCommandExecute(object p) => true;
+
+		private void OnStartProcessCommandExecuted(object p)
+        {
+			DataValue = _asyncData.GetResult(DateTime.Now);
+        }
+
+		#endregion // StartProcessCommand
+
+
+		#region StopProcessCommand
+
+		public ICommand StopProcessCommand { get; }
+
+		private bool CanStopProcessCommandExecute(object p) => true;
+
+		private void OnStopProcessCommandExecuted(object p)
+		{
+
+		}
+
+		#endregion // StopProcessCommand
+
 
 		#endregion // Commands
 
@@ -306,11 +340,9 @@ namespace CV19.ViewModels
 			CountriesStatisticVM = Statistic;
 			Statistic.MainVM = this;
 
+			_asyncData = asyncData;
+
 			//CountriesStatisticVM = new CountriesStatisticViewModel(this);
-
-
-
-
 
 			#region ИНИЦИАЛИЗАЦИЯ КОММАНД!
 
@@ -318,6 +350,9 @@ namespace CV19.ViewModels
 			ChangeTabIndexCommand = new LambdaCommand(OnChangeTabIndexCommandExecute, CanChangeTabIndexCommandExecuted);        // изменение индекса вкладки
 			CreateGroupCommand = new LambdaCommand(OnCreateGroupCommandExecute, CanCreateGroupCommandExecute);                  // создание группы со студентами
 			DeleteGroupCommand = new LambdaCommand(OnDeleteGroupCommandExecute, CanDeleteGroupCommandExecute);                  // удаление группы со студентами
+
+			StartProcessCommand = new LambdaCommand(OnStartProcessCommandExecuted, CanStartProcessCommandExecute);
+			StopProcessCommand = new LambdaCommand(OnStopProcessCommandExecuted, CanStopProcessCommandExecute);
 
             #endregion // ИНИЦИАЛИЗАЦИЯ КОММАНД!
 

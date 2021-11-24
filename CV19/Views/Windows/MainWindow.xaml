@@ -293,7 +293,7 @@
 				<oxy:PlotView Model="{Binding TestPlotModel}" />
 			</TabItem>
 
-            <TabItem Header="DepProp GaugeIndicator" IsSelected="True" Visibility="Visible">
+            <TabItem Header="DepProp GaugeIndicator" IsSelected="False" Visibility="Collapsed">
                 <Grid>
                     <Grid.Resources>
                         <converters:ParametricMultiplyValueConverter x:Key="Mult" Value="{Binding Coefficient}" />
@@ -314,6 +314,20 @@
                             Value="{Binding Coefficient}"
                             ToolTip="{Binding Coefficient}" />
                 </Grid>
+            </TabItem>
+
+            <TabItem Header="Отладка" IsSelected="True" Visibility="Visible">
+                <DockPanel>
+                    <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0">
+                        <UniformGrid DockPanel.Dock="Left" HorizontalAlignment="Left" Rows="1">
+                            <Button Margin="5" Padding="20,5" Content="Запуск" Command="{Binding StartProcessCommand}" />
+                            <Button Margin="5" Padding="20,5" Content="Остановка" />
+                        </UniformGrid>
+                        <ProgressBar DockPanel.Dock="Top" Margin="10" />
+                    </DockPanel>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+                                Text="{Binding DataValue}" FontSize="30" />
+                </DockPanel>
             </TabItem>
 
         </TabControl>
