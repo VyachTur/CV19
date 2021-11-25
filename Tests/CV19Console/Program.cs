@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Runtime.CompilerServices;
 //using System.Net;
 
 namespace CV19Console
@@ -100,6 +101,7 @@ namespace CV19Console
 			Console.ReadLine();
 		}
 
+		[MethodImpl(MethodImplOptions.Synchronized)]
 		private static void PrintMethod(string message, int count, int timeout)
         {
 			for (int i = 0; i < count; i++)
