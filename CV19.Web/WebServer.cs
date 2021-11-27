@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Sockets;
 
 namespace CV19.Web
@@ -30,7 +31,7 @@ namespace CV19.Web
         {
             if (_enabled) return;   // первая проверка не запущен ли сервер (чтобы отсечь лишнюю дорогую операцию lock)
 
-            lock(_syncRoot)
+            lock (_syncRoot)
             {
                 if (_enabled) return;   // вторая проверка, для одновременных обращений из разных потоков (когда первый поток поменяет значение _enabled
                                         // внутри критической секции, следующий за ним поток уже не будет создавать HttpListener
@@ -47,7 +48,7 @@ namespace CV19.Web
         {
             if (!_enabled) return;
 
-            lock(_syncRoot)
+            lock (_syncRoot)
             {
                 if (!_enabled) return;
 
@@ -80,7 +81,7 @@ namespace CV19.Web
 
     }
 
-    public class RequestReceiverEventArgs : EventArgs 
+    public class RequestReceiverEventArgs : EventArgs
     {
         public HttpListenerContext Context { get; }
 
