@@ -72,7 +72,7 @@
 				<views:CountriesStatisticView DataContext="{Binding CountriesStatisticVM}" />
 			</TabItem>
 
-			<TabItem Header="Студенты" Visibility="Collapsed">
+			<TabItem Header="Студенты" Visibility="Visible" IsSelected="True">
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="Auto" />
