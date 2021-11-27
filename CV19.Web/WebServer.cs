@@ -6,7 +6,7 @@ namespace CV19.Web
 {
     public class WebServer
     {
-        private event EventHandler<RequestReceiverEventArgs> RequestReceived;
+        public event EventHandler<RequestReceiverEventArgs> RequestReceived;
 
         //private TcpListener _listener = new TcpListener(new IPEndPoint(IPAddress.Any, 8080));
 
@@ -37,8 +37,8 @@ namespace CV19.Web
                                         // внутри критической секции, следующий за ним поток уже не будет создавать HttpListener
 
                 _listener = new HttpListener();
-                _listener.Prefixes.Add($"http://*:{Port}");
-                _listener.Prefixes.Add($"http://+:{Port}");
+                _listener.Prefixes.Add($"http://*:{Port}/");
+                _listener.Prefixes.Add($"http://+:{Port}/");
                 _enabled = true;
                 ListenAsync();
             }

@@ -18,6 +18,9 @@ namespace CV19Console
 
 		static void Main(string[] args)
 		{
+			WebServerTest.Run();
+
+
 			//Thread.CurrentThread.Name = "Main thread";
 
 			//var clock_thread = new Thread(ThreadMethod);
@@ -70,32 +73,32 @@ namespace CV19Console
 
 
 
-			ManualResetEvent manualResetEvent = new ManualResetEvent(false);	// объект блокировки
-			AutoResetEvent autoResetEvent = new AutoResetEvent(false);
+			//ManualResetEvent manualResetEvent = new ManualResetEvent(false);	// объект блокировки
+			//AutoResetEvent autoResetEvent = new AutoResetEvent(false);
 
-			EventWaitHandle threadGuidance = manualResetEvent;
+			//EventWaitHandle threadGuidance = manualResetEvent;
 
-			var testThreads = new Thread[10];
-			for (int i = 0; i < testThreads.Length; i++)
-            {
-				var local_i = i;
-				testThreads[i] = new Thread(() =>
-				{
-					Console.WriteLine("Поток id: {0} - стартовал", Thread.CurrentThread.ManagedThreadId);
+			//var testThreads = new Thread[10];
+			//for (int i = 0; i < testThreads.Length; i++)
+   //         {
+			//	var local_i = i;
+			//	testThreads[i] = new Thread(() =>
+			//	{
+			//		Console.WriteLine("Поток id: {0} - стартовал", Thread.CurrentThread.ManagedThreadId);
 
-					threadGuidance.WaitOne();	// объект блокировки потока
+			//		threadGuidance.WaitOne();	// объект блокировки потока
 
-                    Console.WriteLine($"Value: {local_i}");
-                    Console.WriteLine("Поток id: {0} - завершился", Thread.CurrentThread.ManagedThreadId);
-				});
-				testThreads[i].Start();
-            }
+   //                 Console.WriteLine($"Value: {local_i}");
+   //                 Console.WriteLine("Поток id: {0} - завершился", Thread.CurrentThread.ManagedThreadId);
+			//	});
+			//	testThreads[i].Start();
+   //         }
 
-            Console.WriteLine("Главный поток готов к запуску потоков!");
-			Console.ReadLine();
+   //         Console.WriteLine("Главный поток готов к запуску потоков!");
+			//Console.ReadLine();
 
-			threadGuidance.Set();	// установка блокировки
-			threadGuidance.Reset();	// сброс блокировки
+			//threadGuidance.Set();	// установка блокировки
+			//threadGuidance.Reset();	// сброс блокировки
 
 
 			Console.ReadLine();
