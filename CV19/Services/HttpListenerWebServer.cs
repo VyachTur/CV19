@@ -27,7 +27,7 @@ namespace CV19.Services
         private static void OnRequestReceived(object sender, RequestReceiverEventArgs e)
         {
             using StreamWriter writer = new(e.Context.Response.OutputStream);
-            writer.WriteLine("CV-19 Application");
+            writer.WriteLine($"CV-19 Application ({DateTime.Now})");
         }
     }
 }
