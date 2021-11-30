@@ -24,6 +24,7 @@ namespace CV19Console
             Console.WriteLine("Connection {0}", context.Request.UserHostAddress);
 
             using var writer = new StreamWriter(context.Response.OutputStream);
+
             writer.WriteLine("Hello from Test Web Server!!!");
         }
     }

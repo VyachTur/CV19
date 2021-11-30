@@ -30,14 +30,16 @@
 	<DockPanel>
 		<Menu DockPanel.Dock="Top">
 			<MenuItem Header="Файл">
-				<MenuItem Header="Выход" Command="{Binding CloseApplicationCommand}" />
-				<!--<MenuItem Header="Выход" Command="{StaticResource CloseApplicationCommand}" />-->
-				<!--<MenuItem Header="Выход">
-					<MenuItem.Command>
-						<cmd:CloseApplicationCommand />
-					</MenuItem.Command>
-				</MenuItem>-->
-			</MenuItem>
+                <MenuItem Header="Выход" Command="{Binding CloseApplicationCommand}" />
+            </MenuItem>
+            <MenuItem Header="Сервис">
+                <MenuItem Header="ВЕБ-сервер" DataContext="{Binding WebServerVM}">
+                    <MenuItem Header="Включен" IsCheckable="True" IsChecked="{Binding Enabled}" />
+                    <Separator />
+                    <MenuItem Header="Включить" Command="{Binding StartCommand}" />
+                    <MenuItem Header="Выключить" Command="{Binding StopCommand}" />
+                </MenuItem>
+            </MenuItem>
 			<MenuItem Header="Помощь">
 				<MenuItem Header="О программе" />
 			</MenuItem>
@@ -68,11 +70,11 @@
 
 		<TabControl x:Name="tbCtrl" SelectedIndex="{Binding SelectedTabIndex}">
 
-			<TabItem Header="Статистика Covid-19" IsSelected="False" Visibility="Collapsed">
+			<TabItem Header="Статистика Covid-19" IsSelected="True" Visibility="Visible">
 				<views:CountriesStatisticView DataContext="{Binding CountriesStatisticVM}" />
 			</TabItem>
 
-			<TabItem Header="Студенты" Visibility="Visible" IsSelected="True">
+			<TabItem Header="Студенты" Visibility="Collapsed" IsSelected="False">
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="Auto" />
@@ -316,7 +318,7 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Отладка" IsSelected="True" Visibility="Visible">
+            <TabItem Header="Отладка" IsSelected="False" Visibility="Collapsed">
                 <DockPanel>
                     <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0">
                         <UniformGrid DockPanel.Dock="Left" HorizontalAlignment="Left" Rows="1">

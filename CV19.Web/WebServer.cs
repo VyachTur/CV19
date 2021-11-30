@@ -37,7 +37,7 @@ namespace CV19.Web
                                         // внутри критической секции, следующий за ним поток уже не будет создавать HttpListener
 
                 _listener = new HttpListener();
-                _listener.Prefixes.Add($"http://*:{Port}/");
+                _listener.Prefixes.Add($"http://*:{Port}/");    // прописать в консоле под админом: netsh http add urlacl url=http://*:8080/ user=tampl
                 _listener.Prefixes.Add($"http://+:{Port}/");
                 _enabled = true;
                 ListenAsync();
