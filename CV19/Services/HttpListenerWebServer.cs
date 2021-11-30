@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CV19.Services
@@ -26,6 +27,7 @@ namespace CV19.Services
 
         private static void OnRequestReceived(object sender, RequestReceiverEventArgs e)
         {
+            Thread.Sleep(3000);
             using StreamWriter writer = new(e.Context.Response.OutputStream);
             writer.WriteLine($"CV-19 Application ({DateTime.Now})");
         }
