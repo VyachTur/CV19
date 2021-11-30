@@ -9,6 +9,7 @@ namespace CV19.Services
         {
             services.AddSingleton<IDataService, DataService>();
             services.AddTransient<IAsyncDataService, AsyncDataService>();
+            services.AddTransient<IWebServerService, HttpListenerWebServer>();
 
             return services;
         }

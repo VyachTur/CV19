@@ -1,4 +1,5 @@
 ﻿using CV19.Infrastructure.Commands;
+using CV19.Services.Interfaces;
 using CV19.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace CV19.ViewModels
     internal class WebServerViewModel : ViewModel
     {
         #region Fields and Properties
+
+        private readonly IWebServerService _server;
 
         #region Enabled
         private bool _enabled;
@@ -53,10 +56,17 @@ namespace CV19.ViewModels
         private void OnStopCommandExecuted(object p)
         {
             Enabled = false;
-        } 
+        }
         #endregion
 
         #endregion // Commands
+
+
+
+        public WebServerViewModel(IWebServerService Server)
+        {
+            _server = Server;
+        }
 
     }
 }
