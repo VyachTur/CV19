@@ -25,6 +25,8 @@ namespace CV19.ViewModels
 
 		public CountriesStatisticViewModel CountriesStatisticVM { get; }
 
+		public WebServerViewModel WebServerVM { get; }
+
 		private readonly IAsyncDataService _asyncData;
 
 		private string _dataValue;
@@ -337,9 +339,10 @@ namespace CV19.ViewModels
 		/// <summary>
 		/// Конструктор класса
 		/// </summary>
-		public MainWindowViewModel(CountriesStatisticViewModel Statistic, IAsyncDataService asyncData)
+		public MainWindowViewModel(CountriesStatisticViewModel Statistic, IAsyncDataService asyncData, WebServerViewModel WebServerVM)
 		{
 			CountriesStatisticVM = Statistic;
+			this.WebServerVM = WebServerVM;
 			Statistic.MainVM = this;
 
 			_asyncData = asyncData;
