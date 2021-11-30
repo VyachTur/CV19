@@ -9,6 +9,16 @@ namespace CV19.Services
 {
     internal class HttpListenerWebServer : IWebServerService
     {
+        public bool Enabled { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
+        public void Start()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Stop()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
