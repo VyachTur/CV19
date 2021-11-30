@@ -52,7 +52,7 @@ namespace CV19.Web
             {
                 if (!_enabled) return;
 
-                _listener = null;
+                _listener = null!;
                 _enabled = false;
             }
 

@@ -1,6 +1,8 @@
 ﻿using CV19.Services.Interfaces;
+using CV19.Web;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,16 +11,23 @@ namespace CV19.Services
 {
     internal class HttpListenerWebServer : IWebServerService
     {
-        public bool Enabled { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        private WebServer _server = new(8080);
 
-        public void Start()
+        public bool Enabled { get => _server.Enabled; set => _server.Enabled = value; }
+
+        public void Start() => _server.Start();
+
+        public void Stop() => _server.Stop();
+
+        public HttpListenerWebServer()
         {
-            throw new NotImplementedException();
+            _server.RequestReceived += OnRequestReceived;
         }
 
-        public void Stop()
+        private static void OnRequestReceived(object sender, RequestReceiverEventArgs e)
         {
-            throw new NotImplementedException();
+            using StreamWriter writer = new(e.Context.Response.OutputStream);
+            writer.WriteLine("CV-19 Application");
         }
     }
 }
