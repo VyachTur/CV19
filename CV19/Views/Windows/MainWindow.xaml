@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:fa="http://schemas.fontawesome.com/icons/"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
 		xmlns:l="clr-namespace:CV19"
 		xmlns:views="clr-namespace:CV19.Views"
 		xmlns:cmd="clr-namespace:CV19.Infrastructure.Commands"
@@ -16,6 +17,11 @@
 		Title="{Binding Title}"
 		DataContext="{Binding MainWindowVM, Source={StaticResource Locator}}"
 		Height="600" Width="1100">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding CountriesStatisticVM.RefreshDataCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
 	<Window.InputBindings>
 		<KeyBinding Modifiers="Ctrl" Key="Q" Command="{Binding CloseApplicationCommand}" />
