@@ -8,6 +8,9 @@
         mc:Ignorable="d"
         Title="TestWindow" Height="450" Width="800">
     <Grid>
-        
+        <Button VerticalAlignment="Top" HorizontalAlignment="Left" Margin="30,40" Padding="20,5">Hello World</Button>
+        <Canvas>
+            <Ellipse Canvas.Left="134" Canvas.Bottom="20" StrokeThickness="1" Stroke="Blue" Fill="Red" Width="30" Height="20" Canvas.Top="183" />
+        </Canvas>
     </Grid>
 </Window>
