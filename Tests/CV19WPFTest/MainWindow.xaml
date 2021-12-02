@@ -5,6 +5,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:local="clr-namespace:CV19WPFTest"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
 	Title="MainWindow"
 	Width="800" Height="450"
 	mc:Ignorable="d">
@@ -12,12 +13,31 @@
         <Button HorizontalAlignment="Center" 
                 VerticalAlignment="Center" 
                 MinHeight="40" Padding="10" 
-                Content="Кнопка" Click="Button_Click" />
+                Content="Кнопка" Click="Button_Click" >
+            
+        </Button>
+
 
         <TextBox x:Name="txtProc" HorizontalAlignment="Center" 
                  VerticalAlignment="Top"
                  Margin="10" Padding="5"
-                 MinWidth="200"/>
+                 MinWidth="200">
+            <i:Interaction.Behaviors>
+                <i:MouseDragElementBehavior />
+            </i:Interaction.Behaviors>
+        </TextBox>
+
+        <Canvas>
+            <Ellipse Canvas.Left="30" Canvas.Top="10"
+                     Stroke="Red" StrokeThickness="2"
+                     Fill="DarkBlue"
+                     Width="30" Height="30">
+                <i:Interaction.Behaviors>
+                    <i:MouseDragElementBehavior />
+                </i:Interaction.Behaviors>
+            </Ellipse>
+
+        </Canvas>
         
     </Grid>
 </Window>
