@@ -59,7 +59,7 @@
                                     <StackPanel.Resources>
                                         <Style TargetType="{x:Type Button}" BasedOn="{StaticResource WindowHeaderButtonsStyle}" />
                                         <Style TargetType="{x:Type Path}">
-                                            <Setter Property="StrokeThickness" Value="3" />
+                                            <Setter Property="StrokeThickness" Value="2" />
                                             <Setter Property="Stroke" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
                                             <Setter Property="Margin" Value="10" />
                                         </Style>
