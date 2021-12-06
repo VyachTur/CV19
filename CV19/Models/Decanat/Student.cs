@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CV19.Models.Interfaces;
+using System;
 
 namespace CV19.Models.Decanat
 {
-	internal class Student
+	internal class Student : IEntity
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public string Surname { get; set; }

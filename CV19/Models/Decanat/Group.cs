@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using CV19.Models.Interfaces;
+using System.Collections.Generic;
 
 namespace CV19.Models.Decanat
 {
-	internal class Group
+	internal class Group : IEntity
 	{
-        public string Name { get; set; }
+		public int Id { get; set; }
+
+		public string Name { get; set; }
 
         public IList<Student> Students { get; set; }
 
