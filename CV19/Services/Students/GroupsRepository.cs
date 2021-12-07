@@ -1,7 +1,7 @@
 ﻿using CV19.Models.Decanat;
 using CV19.Services.Base;
 
-namespace CV19.Services
+namespace CV19.Services.Students
 {
     internal class GroupsRepository : RepositoryInMemory<Group>
     {
