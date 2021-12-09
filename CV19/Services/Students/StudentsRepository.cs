@@ -11,7 +11,7 @@ namespace CV19.Services.Students
         {
             destination.Name = source.Name;
             destination.Surname = source.Surname;
-            destination.Patronimic = source.Patronimic;
+            destination.Patronymic = source.Patronymic;
             destination.Birthday = source.Birthday;
             destination.Rating = source.Rating;
         }

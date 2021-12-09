@@ -36,8 +36,12 @@
         <GroupBox Grid.Column="1" Header="Студенты">
             <DockPanel>
                 <UniformGrid DockPanel.Dock="Bottom" Rows="1">
-                    <Button fa:Awesome.Content="Solid_Plus" Foreground="#FF5BB712" Margin="0,3,3,0" Padding="5" Background="WhiteSmoke" />
-                    <Button fa:Awesome.Content="Solid_UserEdit" Foreground="#FF8D9C0A" Margin="0,3,0,0" Padding="5" Background="WhiteSmoke" />
+                    <Button fa:Awesome.Content="Solid_Plus" Foreground="#FF5BB712" 
+                            Margin="0,3,3,0" Padding="5" Background="WhiteSmoke"
+                            Command="{Binding CreateStudentCommand}" CommandParameter="{Binding SelectedGroup}"/>
+                    <Button fa:Awesome.Content="Solid_UserEdit" Foreground="#FF8D9C0A" 
+                            Margin="0,3,0,0" Padding="5" Background="WhiteSmoke" 
+                            Command="{Binding EditStudentCommand}" CommandParameter="{Binding SelectedStudent}" />
                 </UniformGrid>
                 <ListBox ItemsSource="{Binding SelectedGroup.Students}" SelectedItem="{Binding SelectedStudent}">
                     <ListBox.ItemContainerStyle>
@@ -55,7 +59,7 @@
                                 </TextBlock.ToolTip>
                                 <TextBlock Text="{Binding Surname}" />
                                 <TextBlock Text="{Binding Name}" />
-                                <TextBlock Text="{Binding Patronimic}" />
+                                <TextBlock Text="{Binding Patronymic}" />
                             </TextBlock>
                     </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -98,7 +102,7 @@
 
                 <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Surname}" />
                 <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Name}" />
-                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Patronimic}" />
+                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Patronymic}" />
                 <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Birthday, StringFormat=dd.MM.yyyy}" />
                 <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding Rating, StringFormat=0.##}" />
 

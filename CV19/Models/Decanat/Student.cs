@@ -11,7 +11,7 @@ namespace CV19.Models.Decanat
 
         public string Surname { get; set; }
 
-        public string Patronimic { get; set; }
+        public string Patronymic { get; set; }
 
         public DateTime Birthday { get; set; }
 

@@ -30,7 +30,7 @@ namespace CV19.Services.Students
                     {
                         Name = $"Имя {index}",
                         Surname = $"Фамилия {index}",
-                        Patronimic = $"Отчество {index++}",
+                        Patronymic = $"Отчество {index++}",
                         Birthday = DateTime.Now.Subtract(TimeSpan.FromDays(300 * rnd.Next(19,30))),
                         Rating = rnd.NextDouble() * 100
                     });

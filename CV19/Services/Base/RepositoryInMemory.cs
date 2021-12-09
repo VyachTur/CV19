@@ -16,7 +16,7 @@ namespace CV19.Services.Base
         {
             foreach (var entity in entities)
             {
-                _entities.Add(entity);
+                Add(entity);
             }
         }
 

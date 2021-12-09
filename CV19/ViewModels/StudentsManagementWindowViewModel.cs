@@ -1,12 +1,9 @@
 ﻿using CV19.Infrastructure.Commands;
 using CV19.Models.Decanat;
+using CV19.Services.Interfaces;
 using CV19.Services.Students;
 using CV19.ViewModels.Base;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace CV19.ViewModels
@@ -14,10 +11,11 @@ namespace CV19.ViewModels
     internal class StudentsManagementWindowViewModel : ViewModel
     {
         private readonly StudentsManager _studentsManager;
+        private readonly IUserDialogService _userDialog;
 
 
         #region Title
-            private string _title = "Управление студентами";
+        private string _title = "Управление студентами";
 
             public string Title
             {
@@ -62,8 +60,16 @@ namespace CV19.ViewModels
 
         private void OnEditStudentCommandExecuted(object p)
         {
-            var student = (Student)p;
+            if (_userDialog.Edit(p))
+            {
+                _studentsManager.Update((Student)p);
 
+                _userDialog.ShowInformation("Студент отредактирован", "Менеджер студентов");
+            }
+            else
+            {
+                _userDialog.ShowWarning("Отказ от редактирования", "Менеджер студентов");
+            }
         }
 
         #endregion // EditStudentCommand
@@ -84,6 +90,16 @@ namespace CV19.ViewModels
         {
             var group = (Group)p;
 
+            var student = new Student();
+
+            if (_userDialog.Edit(student) | _studentsManager.Create(student, group.Name))
+            {
+                OnPropertyChanged(nameof(Students));
+                return;
+            }
+
+            if (_userDialog.Confirm("Не удалось создать студента. Повторить?", "Менеджер студентов"))
+                OnCreateStudentCommandExecuted(p);
         }
 
         #endregion
@@ -95,6 +111,10 @@ namespace CV19.ViewModels
 
         public IEnumerable<Group> Groups => _studentsManager.Groups;
 
-        public StudentsManagementWindowViewModel(StudentsManager studentsManager) { _studentsManager = studentsManager; }
+        public StudentsManagementWindowViewModel(StudentsManager studentsManager, IUserDialogService userDialog) 
+        { 
+            _studentsManager = studentsManager;
+            _userDialog = userDialog;
+        }
     }
 }

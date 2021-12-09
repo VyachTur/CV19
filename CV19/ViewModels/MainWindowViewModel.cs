@@ -119,7 +119,7 @@ namespace CV19.ViewModels
 			var filter_text = _studentFilterText;
 			if (string.IsNullOrWhiteSpace(filter_text)) return;
 
-			if (student.Name is null || student.Surname is null || student.Patronimic is null)
+			if (student.Name is null || student.Surname is null || student.Patronymic is null)
 			{
 				e.Accepted = false;
 				return;
@@ -127,7 +127,7 @@ namespace CV19.ViewModels
 
 			if (student.Name.Contains(filter_text, StringComparison.OrdinalIgnoreCase)) return;
 			if (student.Surname.Contains(filter_text, StringComparison.OrdinalIgnoreCase)) return;
-			if (student.Patronimic.Contains(filter_text, StringComparison.OrdinalIgnoreCase)) return;
+			if (student.Patronymic.Contains(filter_text, StringComparison.OrdinalIgnoreCase)) return;
 
 			e.Accepted = false;
 		}
@@ -391,7 +391,7 @@ namespace CV19.ViewModels
 			{
 				Name = $"Name {student_index}",
 				Surname = $"Surname {student_index}",
-				Patronimic = $"Patronimic {student_index++}",
+				Patronymic = $"Patronymic {student_index++}",
 				Birthday = DateTime.Now,
 				Rating = 0
 			});
